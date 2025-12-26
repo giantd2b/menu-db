@@ -139,6 +139,9 @@ export const DEFAULT_CATEGORIES = [
   { name: 'ค่าใช้จ่ายส่วนตัว-ภูมิ', description: 'ค่าใช้จ่ายส่วนตัวภูมิ', color: '#7c3aed' },
   { name: 'ค่าใช้จ่ายส่วนตัว-ศิริ', description: 'ค่าใช้จ่ายส่วนตัวศิริ', color: '#8b5cf6' },
 
+  // === เงินโอนภายใน ===
+  { name: 'เงินโอนระหว่างบัญชีบริษัท', description: 'โอนเงินระหว่างบัญชีบริษัทในเครือ', color: '#0ea5e9' },
+
   // === อื่นๆ ===
   { name: 'ค่าใช้จ่ายอื่น', description: 'ค่าใช้จ่ายอื่นๆ ทั่วไป', color: '#94a3b8' },
   { name: 'ไม่ระบุ', description: 'ยังไม่ได้จัดหมวดหมู่', color: '#cbd5e1' },
@@ -149,6 +152,14 @@ export const DEFAULT_CATEGORIES = [
  * ใช้ Note เป็นหลักในการจัดหมวดหมู่
  */
 const CATEGORY_RULES: CategoryRule[] = [
+  // === Priority 0: เงินโอนระหว่างบัญชีบริษัท (สำคัญที่สุด) ===
+  {
+    category: 'เงินโอนระหว่างบัญชีบริษัท',
+    notePatterns: ['เติมบุญ', 'ไอริส', /โอน.*เติมบุญ/i, /โอน.*ไอริส/i],
+    descPatterns: ['เติมบุญ', 'ไอริส', /TERMBOON/i, /IRIS/i],
+    priority: 0,
+  },
+
   // === Priority 1: คำเฉพาะเจาะจงมากที่สุด ===
   {
     category: 'ค่ารถรับส่งพระ',

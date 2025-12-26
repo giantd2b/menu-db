@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest'
+import { categorizeTransaction } from '@/lib/utils/categorize'
 
 /**
  * Helper function to generate unique transaction key
@@ -316,5 +317,59 @@ describe('Real World Scenarios', () => {
     const statement2Tx = { ...statement1Tx } // Same transaction appears in both statements
 
     expect(isDuplicate(statement1Tx, statement2Tx)).toBe(true)
+  })
+})
+
+describe('Inter-Company Transfer Categorization', () => {
+  const createMockTransaction = (note: string, description: string = '') => ({
+    date: new Date(),
+    description,
+    rawDescription: description,
+    note,
+    withdrawal: 50000,
+    deposit: null,
+    balance: 100000,
+    accountNumber: '1234567890',
+    accountName: null,
+    accountType: null,
+    channel: null,
+    transactionCode: null,
+    chequeNumber: null,
+  })
+
+  it('should categorize transfer to เติมบุญ as inter-company transfer', () => {
+    const tx = createMockTransaction('โอนเงินให้เติมบุญ')
+    expect(categorizeTransaction(tx)).toBe('เงินโอนระหว่างบัญชีบริษัท')
+  })
+
+  it('should categorize transfer to ไอริส as inter-company transfer', () => {
+    const tx = createMockTransaction('โอนไอริส')
+    expect(categorizeTransaction(tx)).toBe('เงินโอนระหว่างบัญชีบริษัท')
+  })
+
+  it('should detect เติมบุญ in description', () => {
+    const tx = createMockTransaction('', 'โอนเงินไปบัญชีเติมบุญ')
+    expect(categorizeTransaction(tx)).toBe('เงินโอนระหว่างบัญชีบริษัท')
+  })
+
+  it('should detect ไอริส in description', () => {
+    const tx = createMockTransaction('', 'Transfer to IRIS Company')
+    expect(categorizeTransaction(tx)).toBe('เงินโอนระหว่างบัญชีบริษัท')
+  })
+
+  it('should detect TERMBOON in English description', () => {
+    const tx = createMockTransaction('', 'TERMBOON CO LTD')
+    expect(categorizeTransaction(tx)).toBe('เงินโอนระหว่างบัญชีบริษัท')
+  })
+
+  it('should have highest priority (priority 0)', () => {
+    // Even if note contains other keywords, เติมบุญ should take priority
+    const tx = createMockTransaction('โอนเติมบุญ ค่าน้ำมัน')
+    expect(categorizeTransaction(tx)).toBe('เงินโอนระหว่างบัญชีบริษัท')
+  })
+
+  it('should NOT categorize unrelated transfers as inter-company', () => {
+    const tx = createMockTransaction('โอนเงินให้พนักงาน')
+    expect(categorizeTransaction(tx)).not.toBe('เงินโอนระหว่างบัญชีบริษัท')
   })
 })

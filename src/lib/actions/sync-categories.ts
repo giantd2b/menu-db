@@ -81,6 +81,8 @@ const EXCEL_CATEGORIES = [
   { name: "ค่าจ้างผลิตสื่อโฆษณา", color: "#86198f" },
   { name: "ค่าประปา", color: "#9d174d" },
   { name: "ภาษีเงินได้ค้างจ่าย", color: "#9f1239" },
+  // เงินโอนภายใน
+  { name: "เงินโอนระหว่างบัญชีบริษัท", color: "#0ea5e9" },
   // Default fallback
   { name: "ไม่ระบุ", color: "#94a3b8" },
 ]

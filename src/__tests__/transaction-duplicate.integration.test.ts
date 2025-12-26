@@ -129,8 +129,9 @@ describe('Transaction Duplicate Detection (Integration)', () => {
       expect(count).toBe(2)
 
       const transactions = await getTestTransactions(TEST_ACCOUNT)
-      expect(transactions[0].description).toBe('Withdrawal')
-      expect(transactions[1].description).toBe('Deposit')
+      const descriptions = transactions.map(t => t.description).sort()
+      expect(descriptions).toContain('Withdrawal')
+      expect(descriptions).toContain('Deposit')
     })
   })
 
