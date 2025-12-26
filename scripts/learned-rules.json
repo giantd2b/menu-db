@@ -1,0 +1,1042 @@
+[
+  {
+    "category": "ค่าโฆษณาออนไลน์อื่น",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 100
+  },
+  {
+    "category": "ค่าโฆษณาออนไลน์อื่น",
+    "field": "description",
+    "pattern": "to KBANK",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 100
+  },
+  {
+    "category": "ค่าโฆษณาออนไลน์อื่น",
+    "field": "description",
+    "pattern": "x2040",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 63
+  },
+  {
+    "category": "ภาษีขาย ภ.พ.30",
+    "field": "description",
+    "pattern": "จ่ายบิล",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 100
+  },
+  {
+    "category": "ภาษีขาย ภ.พ.30",
+    "field": "description",
+    "pattern": "REVENUE",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 100
+  },
+  {
+    "category": "ภาษีขาย ภ.พ.30",
+    "field": "description",
+    "pattern": "DEPARTMENT",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 100
+  },
+  {
+    "category": "ภาษีถูกหัก ณ ที่จ่าย",
+    "field": "description",
+    "pattern": "จ่ายบิล",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 100
+  },
+  {
+    "category": "ภาษีถูกหัก ณ ที่จ่าย",
+    "field": "description",
+    "pattern": "REVENUE",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 100
+  },
+  {
+    "category": "ภาษีถูกหัก ณ ที่จ่าย",
+    "field": "description",
+    "pattern": "DEPARTMENT",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 100
+  },
+  {
+    "category": "สำรองจ่ายแทนกิจการที่ยังไม่ได้คืนเงิน - ภูมิ",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 100
+  },
+  {
+    "category": "ค่าอุปกรณ์และเครื่องใช้สำนักงาน",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 100
+  },
+  {
+    "category": "ค่าบริการสอบบัญชี",
+    "field": "note",
+    "pattern": "ค่าสอบบัญชี",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 100
+  },
+  {
+    "category": "ค่าบริการสอบบัญชี",
+    "field": "description",
+    "pattern": "x0512",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 100
+  },
+  {
+    "category": "ค่าบริการสอบบัญชี",
+    "field": "description",
+    "pattern": "SIRIMA",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 100
+  },
+  {
+    "category": "ค่าสวัสดิการอาหาร เครื่องดื่ม",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 100
+  },
+  {
+    "category": "ค่ารถรับส่งพระ",
+    "field": "note",
+    "pattern": "รับพระ",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 95
+  },
+  {
+    "category": "ค่ารถรับส่งพระ",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 91
+  },
+  {
+    "category": "ค่ารถรับส่งพระ",
+    "field": "description",
+    "pattern": "to KBANK",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 65
+  },
+  {
+    "category": "ค่าโฆษณา Google Adwords",
+    "field": "note",
+    "pattern": "ads",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 95
+  },
+  {
+    "category": "ค่าโฆษณา Google Adwords",
+    "field": "note",
+    "pattern": "google",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 79
+  },
+  {
+    "category": "ค่าเช่าสำนักงาน",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 92
+  },
+  {
+    "category": "ค่าเช่าสำนักงาน",
+    "field": "description",
+    "pattern": "to KTB",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 39
+  },
+  {
+    "category": "ค่าเช่าสำนักงาน",
+    "field": "description",
+    "pattern": "x4850",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 33
+  },
+  {
+    "category": "เงินจ่ายล่วงหน้า - เงินมัดจำ",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 91
+  },
+  {
+    "category": "เงินจ่ายล่วงหน้า - เงินมัดจำ",
+    "field": "description",
+    "pattern": "to KBANK",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 45
+  },
+  {
+    "category": "เงินจ่ายล่วงหน้า - เงินมัดจำ",
+    "field": "note",
+    "pattern": "มัดจำ",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 24
+  },
+  {
+    "category": "อุปกรณ์ของใช้งานจัดเลี้ยง-ครัว",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 91
+  },
+  {
+    "category": "อุปกรณ์ของใช้งานจัดเลี้ยง-ครัว",
+    "field": "description",
+    "pattern": "to KBANK",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 52
+  },
+  {
+    "category": "วัสดุสิ้นเปลืองงานแต่ง-ค่าใช้จ่ายงานแต่ง",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 89
+  },
+  {
+    "category": "วัสดุสิ้นเปลืองงานแต่ง-ค่าใช้จ่ายงานแต่ง",
+    "field": "description",
+    "pattern": "to KBANK",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 42
+  },
+  {
+    "category": "วัสดุสิ้นเปลืองงานแต่ง-ค่าใช้จ่ายงานแต่ง",
+    "field": "description",
+    "pattern": "to SCB",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 34
+  },
+  {
+    "category": "ค่าจ้างบริการเว็บไซต์",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 84
+  },
+  {
+    "category": "ค่าจ้างบริการเว็บไซต์",
+    "field": "description",
+    "pattern": "บริษัท",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 46
+  },
+  {
+    "category": "ค่าจ้างบริการเว็บไซต์",
+    "field": "description",
+    "pattern": "to SCB",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 41
+  },
+  {
+    "category": "อุปกรณ์ของใช้งานจัดเลี้ยง-FB",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 83
+  },
+  {
+    "category": "อุปกรณ์ของใช้งานจัดเลี้ยง-FB",
+    "field": "description",
+    "pattern": "to KBANK",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 33
+  },
+  {
+    "category": "ชำระหนี้-ภูมิ",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 83
+  },
+  {
+    "category": "ชำระหนี้-ภูมิ",
+    "field": "description",
+    "pattern": "to SCB",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 71
+  },
+  {
+    "category": "ชำระหนี้-ภูมิ",
+    "field": "description",
+    "pattern": "x2590",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 70
+  },
+  {
+    "category": "เจ้าหนี้เช่าซื้อ",
+    "field": "description",
+    "pattern": "จ่ายบิล",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 82
+  },
+  {
+    "category": "เจ้าหนี้เช่าซื้อ",
+    "field": "description",
+    "pattern": "LEASING",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 72
+  },
+  {
+    "category": "เจ้าหนี้เช่าซื้อ",
+    "field": "note",
+    "pattern": "ค่ารถ",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 70
+  },
+  {
+    "category": "ค่าธรรมเนียมอื่นๆ",
+    "field": "description",
+    "pattern": "จ่ายบิล",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 82
+  },
+  {
+    "category": "ค่าธรรมเนียมอื่นๆ",
+    "field": "description",
+    "pattern": "DEPARTMENT",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 82
+  },
+  {
+    "category": "ค่าธรรมเนียมอื่นๆ",
+    "field": "description",
+    "pattern": "BUSINESS",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 73
+  },
+  {
+    "category": "ค่าทางด่วน",
+    "field": "note",
+    "pattern": "mpass",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 80
+  },
+  {
+    "category": "ค่าทางด่วน",
+    "field": "note",
+    "pattern": "สำรอง",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 55
+  },
+  {
+    "category": "ค่าอบรม สัมมนา",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 80
+  },
+  {
+    "category": "ค่าเช่าเต้นท์-โต๊ะ-เก้าอี้",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 79
+  },
+  {
+    "category": "ค่าเช่าเต้นท์-โต๊ะ-เก้าอี้",
+    "field": "description",
+    "pattern": "to KTB",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 37
+  },
+  {
+    "category": "สินทรัพย์ไม่หมุนเวียนอื่น",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 78
+  },
+  {
+    "category": "สินทรัพย์ไม่หมุนเวียนอื่น",
+    "field": "description",
+    "pattern": "to KBANK",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 41
+  },
+  {
+    "category": "ค่าโฆษณา Facebook Ads",
+    "field": "note",
+    "pattern": "ads",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 78
+  },
+  {
+    "category": "อุปกรณ์ของใช้งานจัดเลี้ยง-ช่าง",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 76
+  },
+  {
+    "category": "อุปกรณ์ของใช้งานจัดเลี้ยง-ช่าง",
+    "field": "description",
+    "pattern": "to KBANK",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 43
+  },
+  {
+    "category": "เงินปันผล",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 76
+  },
+  {
+    "category": "เงินปันผล",
+    "field": "description",
+    "pattern": "x9560",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 58
+  },
+  {
+    "category": "เงินปันผล",
+    "field": "description",
+    "pattern": "NAMFON",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 53
+  },
+  {
+    "category": "ค่ารักษาความปลอดภัย",
+    "field": "note",
+    "pattern": "ค่ารักษาความปลอดภัย",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 76
+  },
+  {
+    "category": "ค่ารักษาความปลอดภัย",
+    "field": "note",
+    "pattern": "2567",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 24
+  },
+  {
+    "category": "ค่าส่งเสริมการขาย",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 75
+  },
+  {
+    "category": "ค่าส่งเสริมการขาย",
+    "field": "description",
+    "pattern": "to KBANK",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 75
+  },
+  {
+    "category": "ค่าบริการคลาวด์เซอร์วิซ",
+    "field": "note",
+    "pattern": "ต่อโปร",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 75
+  },
+  {
+    "category": "ค่าบริการคลาวด์เซอร์วิซ",
+    "field": "note",
+    "pattern": "Humansoft",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 75
+  },
+  {
+    "category": "ต้นทุนการก่อสร้าง",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 73
+  },
+  {
+    "category": "ต้นทุนการก่อสร้าง",
+    "field": "description",
+    "pattern": "to KBANK",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 44
+  },
+  {
+    "category": "ต้นทุนการก่อสร้าง",
+    "field": "description",
+    "pattern": "x1321",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 35
+  },
+  {
+    "category": "ค่าใช้จ่ายส่วนตัว-ภูมิ",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 71
+  },
+  {
+    "category": "ค่าใช้จ่ายส่วนตัว-ภูมิ",
+    "field": "description",
+    "pattern": "KAEWON",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 39
+  },
+  {
+    "category": "ค่าใช้จ่ายส่วนตัว-ภูมิ",
+    "field": "description",
+    "pattern": "to SCB",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 34
+  },
+  {
+    "category": "ค่าซ่อมแซม",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 70
+  },
+  {
+    "category": "อุปกรณ์ของใช้งานจัดเลี้ยง",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 70
+  },
+  {
+    "category": "เจ้าหนี้สรรพากร",
+    "field": "note",
+    "pattern": "ค่าภาษี",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 68
+  },
+  {
+    "category": "เจ้าหนี้สรรพากร",
+    "field": "note",
+    "pattern": "ภพ.30",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 38
+  },
+  {
+    "category": "เจ้าหนี้สรรพากร",
+    "field": "note",
+    "pattern": "ภงด.3",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 35
+  },
+  {
+    "category": "ค่าตวจสอบสภาพรถและภาษียานภาหนะ",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 68
+  },
+  {
+    "category": "ค่าตวจสอบสภาพรถและภาษียานภาหนะ",
+    "field": "description",
+    "pattern": "x4122",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 64
+  },
+  {
+    "category": "ค่าตวจสอบสภาพรถและภาษียานภาหนะ",
+    "field": "description",
+    "pattern": "บริษัท",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 64
+  },
+  {
+    "category": "เงินสมทบประกันสังคม และกองทุนทดแทน",
+    "field": "note",
+    "pattern": "SSO",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 67
+  },
+  {
+    "category": "เงินสมทบประกันสังคม และกองทุนทดแทน",
+    "field": "note",
+    "pattern": "2024",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 58
+  },
+  {
+    "category": "เงินสด",
+    "field": "note",
+    "pattern": "เบิก",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 67
+  },
+  {
+    "category": "เงินสด",
+    "field": "note",
+    "pattern": "Petty",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 67
+  },
+  {
+    "category": "เงินสด",
+    "field": "note",
+    "pattern": "Cash",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 67
+  },
+  {
+    "category": "ค่าตอบแทนกรรมการ",
+    "field": "description",
+    "pattern": "x3142",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 67
+  },
+  {
+    "category": "ค่าตอบแทนกรรมการ",
+    "field": "description",
+    "pattern": "NIPOL",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 67
+  },
+  {
+    "category": "ค่าตอบแทนกรรมการ",
+    "field": "description",
+    "pattern": "POLTHANI",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 67
+  },
+  {
+    "category": "ค่าขนส่งสินค้า",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 65
+  },
+  {
+    "category": "ค่าขนส่งสินค้า",
+    "field": "description",
+    "pattern": "to KBANK",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 40
+  },
+  {
+    "category": "ค่าขนส่งสินค้า",
+    "field": "description",
+    "pattern": "PromptPay to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 35
+  },
+  {
+    "category": "ประกันสังคมค้างจ่าย",
+    "field": "note",
+    "pattern": "SSO",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 65
+  },
+  {
+    "category": "ประกันสังคมค้างจ่าย",
+    "field": "note",
+    "pattern": "ต่างด้วย้อนหลัง",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 24
+  },
+  {
+    "category": "ประกันสังคมค้างจ่าย",
+    "field": "note",
+    "pattern": "2024",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 24
+  },
+  {
+    "category": "ค่าใช้จ่ายอื่น",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 64
+  },
+  {
+    "category": "เงินเดือนค้างจ่าย",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 60
+  },
+  {
+    "category": "เงินเดือนค้างจ่าย",
+    "field": "description",
+    "pattern": "to SCB",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 60
+  },
+  {
+    "category": "เงินเดือนค้างจ่าย",
+    "field": "description",
+    "pattern": "20240430",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 30
+  },
+  {
+    "category": "ต้นทุนการให้บริการ",
+    "field": "note",
+    "pattern": "วันที่",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 58
+  },
+  {
+    "category": "ต้นทุนการให้บริการ",
+    "field": "note",
+    "pattern": "ซื้อสินค้า",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 31
+  },
+  {
+    "category": "ค่าบริการอื่นๆ",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 58
+  },
+  {
+    "category": "ค่าบริการอื่นๆ",
+    "field": "description",
+    "pattern": "to SCB",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 42
+  },
+  {
+    "category": "ค่าบริการอื่นๆ",
+    "field": "note",
+    "pattern": "GPS",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 26
+  },
+  {
+    "category": "ค่าสวัสดิการอื่นๆ",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 57
+  },
+  {
+    "category": "ค่าสวัสดิการอื่นๆ",
+    "field": "description",
+    "pattern": "to SCB",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 32
+  },
+  {
+    "category": "ค่าใช้จ่ายส่วนตัว-ศิริ",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 52
+  },
+  {
+    "category": "ค่าเช่ายานพาหนะ",
+    "field": "description",
+    "pattern": "PromptPay to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 50
+  },
+  {
+    "category": "ค่าเช่ายานพาหนะ",
+    "field": "description",
+    "pattern": "x7400",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 44
+  },
+  {
+    "category": "ค่าเช่ายานพาหนะ",
+    "field": "description",
+    "pattern": "TAWAT",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 44
+  },
+  {
+    "category": "ค่าบริการโฮสติ้ง และเว็บไซต์",
+    "field": "note",
+    "pattern": "Tax",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 50
+  },
+  {
+    "category": "ค่าบริการโฮสติ้ง และเว็บไซต์",
+    "field": "note",
+    "pattern": "ค่าสร้างเอกสาร",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 40
+  },
+  {
+    "category": "ค่าบริการโฮสติ้ง และเว็บไซต์",
+    "field": "note",
+    "pattern": "รอบ",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 40
+  },
+  {
+    "category": "ชำระหนี้-ศิริ",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 47
+  },
+  {
+    "category": "ชำระหนี้-ศิริ",
+    "field": "description",
+    "pattern": "ศิริ",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 36
+  },
+  {
+    "category": "ค่าธรรมเนียมธนาคาร",
+    "field": "description",
+    "pattern": "จากระบบเงินฝาก",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 45
+  },
+  {
+    "category": "ค่าธรรมเนียมธนาคาร",
+    "field": "description",
+    "pattern": "จ่ายบิล",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 36
+  },
+  {
+    "category": "ค่าธรรมเนียมธนาคาร",
+    "field": "description",
+    "pattern": "DEPARTMENT",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 36
+  },
+  {
+    "category": "ค่าไฟฟ้า",
+    "field": "note",
+    "pattern": "ค่าไฟ",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 44
+  },
+  {
+    "category": "ค่าไฟฟ้า",
+    "field": "note",
+    "pattern": "2567",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 41
+  },
+  {
+    "category": "ค่าไฟฟ้า",
+    "field": "note",
+    "pattern": "2568",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 41
+  },
+  {
+    "category": "เงินเดือน ค่าจ้าง",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 43
+  },
+  {
+    "category": "เงินเดือน ค่าจ้าง",
+    "field": "note",
+    "pattern": "เบิก",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 20
+  },
+  {
+    "category": "ค่าน้ำมัน",
+    "field": "description",
+    "pattern": "โอนไป SCB",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 37
+  },
+  {
+    "category": "ค่าน้ำมัน",
+    "field": "description",
+    "pattern": "Transfer to",
+    "isRegex": false,
+    "priority": 2,
+    "confidence": 31
+  },
+  {
+    "category": "ค่าจ้างที่ปรึกษาการตลาด",
+    "field": "note",
+    "pattern": "ค่าการตลาด",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 36
+  },
+  {
+    "category": "ค่าจ้างที่ปรึกษาการตลาด",
+    "field": "note",
+    "pattern": "ที่ปรึกษาการตลาด",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 23
+  },
+  {
+    "category": "ค่าเช่าอุปกรณ์",
+    "field": "note",
+    "pattern": "ค่าเช่าเครื่องล้างจาน",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 34
+  },
+  {
+    "category": "ค่าเช่าอุปกรณ์",
+    "field": "note",
+    "pattern": "ค่าเช่าเครื่องถ่ายเอกสาร",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 24
+  },
+  {
+    "category": "ค่าโทรศัพท์สำนักงาน",
+    "field": "note",
+    "pattern": "ค่าโทรศัพท์",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 31
+  },
+  {
+    "category": "ค่าโทรศัพท์สำนักงาน",
+    "field": "note",
+    "pattern": "อินเตอร์เน็ต",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 24
+  },
+  {
+    "category": "ค่าจ้างพนักงานชั่วคราว",
+    "field": "note",
+    "pattern": "วันที่",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 23
+  },
+  {
+    "category": "ค่าจ้างพนักงานชั่วคราว",
+    "field": "note",
+    "pattern": "เบิกเงินทดรองจ่ายพาร์ทไทม์",
+    "isRegex": false,
+    "priority": 1,
+    "confidence": 21
+  }
+]

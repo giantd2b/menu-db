@@ -1,0 +1,112 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// หมวดหมู่รายการ
+model Category {
+  id           String         @id @default(cuid())
+  name         String         @unique
+  description  String?
+  color        String?        // สีสำหรับแสดงผล UI
+  icon         String?        // ไอคอนสำหรับแสดงผล
+  transactions Transaction[]
+  rules        CategoryRule[] // กฎสำหรับ auto-categorize
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  @@map("categories")
+}
+
+// กฎสำหรับจัดหมวดหมู่อัตโนมัติ
+model CategoryRule {
+  id          String   @id @default(cuid())
+
+  // เชื่อมกับ Category
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  // ประเภท pattern
+  field       String   // "note" หรือ "description"
+  pattern     String   // คำหรือ regex pattern
+  isRegex     Boolean  @default(false) // เป็น regex หรือไม่
+
+  // ลำดับความสำคัญ (ยิ่งต่ำยิ่งสำคัญ)
+  priority    Int      @default(10)
+
+  // สถานะ
+  isActive    Boolean  @default(true)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([categoryId])
+  @@index([priority])
+  @@map("category_rules")
+}
+
+// รายการธุรกรรมจาก Bank Statement
+model Transaction {
+  id              String    @id @default(cuid())
+
+  // ข้อมูลเวลา
+  date            DateTime  // วันที่ทำรายการ (รวม Time)
+
+  // ข้อมูลรายการ
+  description     String    // รายละเอียดที่ใช้แสดงผล (Tr Description)
+  rawDescription  String    // ข้อความดิบจากไฟล์ (Description column)
+  note            String?   // หมายเหตุเพิ่มเติม (Note column)
+
+  // ข้อมูลการเงิน
+  withdrawal      Decimal?  @db.Decimal(15, 2) // ยอดเงินถอน
+  deposit         Decimal?  @db.Decimal(15, 2) // ยอดเงินฝาก
+  balance         Decimal   @db.Decimal(15, 2) // ยอดคงเหลือ
+
+  // ข้อมูลเพิ่มเติมจาก Bank Statement
+  accountNumber   String?   // เลขที่บัญชี
+  accountName     String?   // ชื่อบัญชี
+  accountType     String?   // ประเภทบัญชี (Savings, Current, etc.)
+  channel         String?   // ช่องทางทำรายการ (BCMS, ENET, ATS, etc.)
+  transactionCode String?   // รหัสรายการ (X1, X2, etc.)
+  chequeNumber    String?   // เลขที่เช็ค (ถ้ามี)
+
+  // Relation กับ Category
+  categoryId      String?
+  category        Category? @relation(fields: [categoryId], references: [id])
+
+  // Metadata
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@unique([date, accountNumber, balance, withdrawal], name: "unique_transaction")
+  @@index([date])
+  @@index([categoryId])
+  @@index([accountNumber])
+  @@map("transactions")
+}
+
+// เก็บการแก้ไขของ user เพื่อให้ AI เรียนรู้
+model AICorrection {
+  id              String   @id @default(cuid())
+
+  // ข้อมูล input
+  note            String   // Note ที่ใช้ในการจัดหมวดหมู่
+  description     String?  // Description (optional)
+
+  // ผลลัพธ์
+  aiCategory      String   // หมวดหมู่ที่ AI แนะนำ
+  userCategory    String   // หมวดหมู่ที่ user เลือก (แก้ไข)
+
+  // Metadata
+  createdAt       DateTime @default(now())
+
+  @@index([userCategory])
+  @@map("ai_corrections")
+}

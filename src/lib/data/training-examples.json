@@ -1,0 +1,1076 @@
+{
+  "ค่าน้ำมัน": [
+    {
+      "note": "บพ6170 สุโขทัย ออกงานโคมัตสุ",
+      "description": "โอนไป SCB x7027 นางสาว สมพิศ ประวันเน"
+    },
+    {
+      "note": "ยฉ5812 ชลบุรีออกงานพนัสเซ็ทงานศรีราชา",
+      "description": "โอนไป SCB x8643 นาย สุวิทย์ พรมพิทักษ์"
+    },
+    {
+      "note": "ยฉ 7811 isuzu ออกงานเย็นค็อกเทล พัทยา",
+      "description": "โอนไปพร้อมเพย์ x1513 นาย ศราวุธ ขุนหาญ"
+    },
+    {
+      "note": "3ฒจ849 กทม เซทงานบางเเสน",
+      "description": "โอนไป KBANK x4665 นาย ชาญณรงค์ บัวไขย์"
+    },
+    {
+      "note": "3ฒษ 9907 ออกงานบ้านค่าย/เซตงานบ้านค่าย",
+      "description": "โอนไป SCB x7509 นาย เสฏฐวุฒิ ทรัพย์ประเส"
+    }
+  ],
+  "ค่าเช่าเต้นท์-โต๊ะ-เก้าอี้": [
+    {
+      "note": "เต๊นท์ บางแสน",
+      "description": "โอนไป KBANK x9020 นาย นเรศ แววนิล"
+    },
+    {
+      "note": "เต๊นท์ 3 แท่น 2 พัดลม 3",
+      "description": "โอนไป KTB x1327 นายสนิท แสงมณี"
+    },
+    {
+      "note": "เช่าโต๊ะเก้าอี้ แกลง",
+      "description": "โอนไป BBL x5470 นายสายชล ราญรอน"
+    },
+    {
+      "note": "เต๊นท์ บ้านบึง งานยกเลิก",
+      "description": "โอนไป KBANK x9020 นาย นเรศ แววนิล"
+    },
+    {
+      "note": "เต๊นท์ พัดลม แท่นพระ โต๊ะเก้าอี้",
+      "description": "โอนไป KTB x1327 นายสนิท แสงมณี"
+    }
+  ],
+  "ต้นทุนการให้บริการ": [
+    {
+      "note": "PO ซื้อสินค้า วันที่ 1/12/23",
+      "description": "โอนไป SCB x3146 นางสาว สุนิสา พันพินิจ"
+    },
+    {
+      "note": "ร้านกรองทองซีฟู้ด วันที่ 1/12/23",
+      "description": "Transfer to KBANK x7708 KRONGTHONG SUKKA"
+    },
+    {
+      "note": "งาน 3/12/66 เพิ่มคอฟฟี่เบรค4รายการ",
+      "description": "โอนไป SCB x3146 นางสาว สุนิสา พันพินิจ"
+    },
+    {
+      "note": "ร้านป๊อปปี้กุ้งขาว วันที่ 2/12/23",
+      "description": "Transfer to KBANK x7822 MS. ALISA CHAROE"
+    },
+    {
+      "note": "ร้านเคเคไรซ เทรดดิ้ง วันที่ 17/11/23",
+      "description": "Transfer to BBL x2587 KKD RICE TRADING C"
+    }
+  ],
+  "ค่าจ้างพนักงานชั่วคราว": [
+    {
+      "note": "เบิกเงินทดรองจ่ายพาร์ทไทม์ 1.12.66",
+      "description": "โอนไป SCB x2537 นาย ยศพัทธ์ สุวรรณธนู"
+    },
+    {
+      "note": "เบิดส่วนต่าง พาร์ทไทม์ 27-30 พ.ย.66",
+      "description": "Transfer to SCB x2537 นาย ยศพัทธ์ สุวรรณ"
+    },
+    {
+      "note": "ค่ามัคทายก งานบ้านค่าย 3/12",
+      "description": "Transfer to GSB x8685 WISANU PRICHANO"
+    },
+    {
+      "note": "เบิกส่วนต่าง พาร์ทไทม์ วันที่ 4/12/23",
+      "description": "Transfer to SCB x2537 นาย ยศพัทธ์ สุวรรณ"
+    },
+    {
+      "note": "เบิกทดลองจ่าย พาร์ทไทม์ วันที่ 6/12/23",
+      "description": "โอนไป SCB x2537 นาย ยศพัทธ์ สุวรรณธนู"
+    }
+  ],
+  "ค่ารถรับส่งพระ": [
+    {
+      "note": "รับพระ งานปลวกแดง 30/11",
+      "description": "Transfer to KBANK x2663 MR. CHALOEMCHAT"
+    },
+    {
+      "note": "รับพระพนาทอง/พนัสนิคม/บ้านสวนชลบุรี10/12",
+      "description": "Transfer to KBANK x6118 MR. BOONTHAM PHA"
+    },
+    {
+      "note": "รับพระ  งานบ่อวิน 19/12",
+      "description": "Transfer to KBANK x2663 MR. CHALOEMCHAT"
+    },
+    {
+      "note": "ร้านเคเคไรซ์ เทรดดิ้ง วันที่ 12/12/23",
+      "description": "Transfer to BBL x2587 KKD RICE TRADING C"
+    },
+    {
+      "note": "รับพระ นิคมพัฒนา 28/12",
+      "description": "Transfer to KBANK x3128 MR. ADUN THONGDE"
+    }
+  ],
+  "ค่าจ้างที่ปรึกษาการตลาด": [
+    {
+      "note": "ค่าการตลาด 20/11/23",
+      "description": "Transfer to KBANK x2040 INSIGHTOUT SERVI"
+    },
+    {
+      "note": "ยิงads",
+      "description": "Transfer to KBANK x2621 MS. ORNICHA SRI"
+    },
+    {
+      "note": "ค่าที่ปรึกษาการตลาด เดือนมกราคม 2568",
+      "description": "Transfer to KBANK x2621 MS. ORNICHA  SRI"
+    },
+    {
+      "note": "freelance content Chon จ่ายทุก15",
+      "description": "โอนไป KTB x8949 น.ส. สุปรียา นามปัดถา"
+    },
+    {
+      "note": "google workspace and motion graphic",
+      "description": "Transfer to BAY x5862 POOM KAEWON"
+    }
+  ],
+  "อุปกรณ์ของใช้งานจัดเลี้ยง": [
+    {
+      "note": "ไฟสนาม",
+      "description": "โอนไป SCB x4868 นาย ณัฐพล เหล่าดี"
+    },
+    {
+      "note": "ภาชนะพระ พรีเมี่ยม",
+      "description": "โอนไป KTB x5969 น.ส.ศิริ เกตุประสาท"
+    },
+    {
+      "note": "พรมขนมิ้งค์ 20 ผืน",
+      "description": "โอนไป KBANK x9544 นาง สาริศา อ่อนแก้ว"
+    },
+    {
+      "note": "ซื้อทรัพสิน ถาด4 ใบ แผนกFB",
+      "description": "โอนไป SCB x3146 นางสาว สุนิสา พันพินิจ"
+    },
+    {
+      "note": "ปลอกเก้าอี้ 500 ชิ้น",
+      "description": "โอนไป KBANK x5236 น.ส. พัชรินทร์ มหาวัง"
+    }
+  ],
+  "ค่าบริการอื่นๆ": [
+    {
+      "note": "ค่าทำสวนและค่าแรง",
+      "description": "Transfer to BBL x6675 SUPHATTRA CHUEAKUN"
+    },
+    {
+      "note": "ค่าวัสดุทำสวน",
+      "description": "Transfer to BBL x0735 NARUPHON UPARA"
+    },
+    {
+      "note": "ค่าตราศาลสัญญาเช่าและค่าใบรับรองแพทย์",
+      "description": "โอนไป SCB x2545 นางสาว ขนิษฐา พรมเมือง"
+    },
+    {
+      "note": "ค่าขนส่งพรม",
+      "description": "โอนไป KBANK x0465 น.ส. ศิริ เกตุประสาท"
+    },
+    {
+      "note": "อื่นๆ",
+      "description": "PromptPay to x0956 นาย ชัยณรงค์ นาแข็ง"
+    }
+  ],
+  "เจ้าหนี้เช่าซื้อ": [
+    {
+      "note": "ค่ารถ 6170 กทม",
+      "description": "จ่ายบิล TOYOTA LEASING (THAILAND)"
+    },
+    {
+      "note": "ค่ารถ 1816",
+      "description": "จ่ายบิล TOYOTA LEASING (THAILAND)"
+    },
+    {
+      "note": "ค่ารถ9612",
+      "description": "จ่ายบิล TOYOTA LEASING (THAILAND)"
+    },
+    {
+      "note": "ค่ารถ อีซูสุ",
+      "description": "จ่ายบิล (LEASING/OTHER)TRI PETCH ISUZU L"
+    },
+    {
+      "note": "ค่ารถ 9907",
+      "description": "จ่ายบิล TOYOTA LEASING (THAILAND)"
+    }
+  ],
+  "ค่าเช่าสำนักงาน": [
+    {
+      "note": "ค่าเช่าร้าน",
+      "description": "Transfer to KTB x3332 MRS.PHENPHAN CHANC"
+    },
+    {
+      "note": "ค่าเช่่าร้าน",
+      "description": "Transfer to KTB x3332 MRS.PHENPHAN CHANC"
+    },
+    {
+      "note": "ค่าเช่าตึกแถว สาขาบางปะกง",
+      "description": "Transfer to SCB x0275 นาง นิตยา พงษ์บุบผ"
+    },
+    {
+      "note": "ค่าเช่าที่ดินบางปะกง",
+      "description": "Transfer to BBL x0514 MR SUTHEP SETBUNSA"
+    },
+    {
+      "note": "ค่าเต่าตึก สาขาบางปะกง   1 ธ.ค 67",
+      "description": "Transfer to SCB x0275 นาง นิตยา พงษ์บุบผ"
+    }
+  ],
+  "ค่าไฟฟ้า": [
+    {
+      "note": "ค่าไฟร้านไอริส/หม้อชั่วคราว/EV พฤศจิกายน",
+      "description": "โอนไป KTB x5969 น.ส.ศิริ เกตุประสาท"
+    },
+    {
+      "note": "ค่าไฟ เดือนธันวาคม 2566",
+      "description": "โอนไป KTB x5969 น.ส.ศิริ เกตุประสาท"
+    },
+    {
+      "note": "ค่าไฟ ร้านและออฟฟิศ เดือนมกราคม 67",
+      "description": "โอนไป KTB x5969 น.ส.ศิริ เกตุประสาท"
+    },
+    {
+      "note": "ค่าไฟฟ้า  เดือนกุมภาพันธ์ 2567",
+      "description": "โอนไป KTB x5969 น.ส.ศิริ เกตุประสาท"
+    },
+    {
+      "note": "ค่าไฟไอริส เดือนตุลาคม 2567",
+      "description": "Transfer to KTB x5969 MISSSIRI KETPRASAT"
+    }
+  ],
+  "สินทรัพย์ไม่หมุนเวียนอื่น": [
+    {
+      "note": "ค่ามัดจำหลังคาตู้ทึบ ทะเบียน ถส5346กทม",
+      "description": "Transfer to KBANK x6960 MR. SURIYA THONG"
+    },
+    {
+      "note": "ค่าเก้าอี้มังกร สีขาว 350 ตัว",
+      "description": "โอนไป KBANK x0433 บจก. สหศิลป์ไฮเทค"
+    },
+    {
+      "note": "ค่าดาวน์บางส่วน",
+      "description": "Transfer to SCB x3887 บริษัท  ชลบุรีอีซู"
+    },
+    {
+      "note": "ถังน้ำกับปั๊มน้ำ",
+      "description": "Transfer to SCB x4868 นาย ณัฐพล เหล่าดี"
+    },
+    {
+      "note": "ซื้อตู้ใส่ของ",
+      "description": "Transfer to KBANK x9416 RAPSUE KHONGKAO"
+    }
+  ],
+  "ค่าซ่อมแซม": [
+    {
+      "note": "ค่าซ่อมบำรุงรถ 3ฒง3049กทม",
+      "description": "Transfer to KBANK x0257 Mr. Uthan Thongt"
+    },
+    {
+      "note": "สีทากำแพง",
+      "description": "Transfer to SCB x3901 นาย สิทธิชัย สารมา"
+    },
+    {
+      "note": "ยางอะไหล่",
+      "description": "PromptPay to x4754 MR.PORNTHEP WEANPRADA"
+    },
+    {
+      "note": "เสาเพิ่ม",
+      "description": "PromptPay to x4878 AREERAT TANAKERTPINYA"
+    },
+    {
+      "note": "ค่าสีทาภายนอก สีน้ำมัน สีโป้วปูนอะคริลิค",
+      "description": "Transfer to SCB x3901 นาย สิทธิชัย สารมา"
+    }
+  ],
+  "ค่าใช้จ่ายอื่น": [
+    {
+      "note": "เบิก Petty Cash ทั่วไป",
+      "description": "โอนไป SCB x6572 นางสาว นภาพร ทับทิมหิน"
+    },
+    {
+      "note": "ค่าตู้แดง 12/23",
+      "description": "Transfer to SCB x2000 นาย ฉัตรชัย รักควา"
+    },
+    {
+      "note": "ค่านิมนต์พระซ้อน งานเขาน้อย 10/12",
+      "description": "โอนไป SCB x3786 นาย โรจน์ศักดิ์ หลีกทุกข"
+    },
+    {
+      "note": "ค่าบริการ GPS เดือนธันวาคม 66",
+      "description": "Transfer to BBL x1115 CARTRACK TECHNOLOG"
+    },
+    {
+      "note": "ค่ารถเก็บขยะใหญ่",
+      "description": "โอนไป GSB x4265 นาย สมพงษ์ อนุพงษ์ภิชาติ"
+    }
+  ],
+  "เงินจ่ายล่วงหน้า - เงินมัดจำ": [
+    {
+      "note": "เงินมัดจำรถบรรทุก",
+      "description": "โอนไป SCB x3887 บริษัท  ชลบุรีอีซูซุเซลส"
+    },
+    {
+      "note": "ค่ามัดจำเรียนขับรถ 3 คน",
+      "description": "Transfer to SCB x2537 นาย ยศพัทธ์ สุวรรณ"
+    },
+    {
+      "note": "มัดจำผ้าคลุมโต๊ะเหลี่ยม 150 ซม 40 ชิ้น",
+      "description": "โอนไป SCB x6399 บริษัท เพอร์เฟค กรุ๊ป อิ"
+    },
+    {
+      "note": "มัดจำค่าเสื้อ 24 ตัว",
+      "description": "Transfer to KBANK x6089 TKK STORY CO.,LT"
+    },
+    {
+      "note": "มัดจำค่ารถเข็น แสตนเลส3 ชิ้น",
+      "description": "Transfer to BAY x1585 ATTHAPHON PRO"
+    }
+  ],
+  "ค่าสวัสดิการอื่นๆ": [
+    {
+      "note": "ค่าตรวจร่างกาย ต่างด้าว 4 คน",
+      "description": "โอนไป KTB x0231 น.ส.กชพร ซิ้มเทียม"
+    },
+    {
+      "note": "ค่าเสื้อเชิ้ตคอตั้งจีน พนักงาน ช/ญ",
+      "description": "โอนไป KBANK x5977 นาง ประทุมทิพย์ ไพรพฤก"
+    },
+    {
+      "note": "มัดจำห้องพี่ปู",
+      "description": "Transfer to BBL x9560 MS NAMFON WONGSUWA"
+    },
+    {
+      "note": "ค่านิมนต์พระ ธค",
+      "description": "โอนไป KBANK x8827 นาย ธีรพัฒน์ ช่างหนอง"
+    },
+    {
+      "note": "ค่าห้องพี่ปู",
+      "description": "Transfer to BBL x9560 MS NAMFON WONGSUWA"
+    }
+  ],
+  "ค่าตวจสอบสภาพรถและภาษียานภาหนะ": [
+    {
+      "note": "ประกันรถ 9612",
+      "description": "โอนไป SCB x4122 บริษัท ศรีกรุงโบรคเกอร์"
+    },
+    {
+      "note": "พรบ ประกันภัยรถ 7261",
+      "description": "โอนไป SCB x4122 บริษัท ศรีกรุงโบรคเกอร์"
+    },
+    {
+      "note": "ประกันภัย พรบ รถ 7811",
+      "description": "โอนไป SCB x4122 บริษัท ศรีกรุงโบรคเกอร์"
+    },
+    {
+      "note": "ต่อทะเบียนคอก 3ฒย6741กทม",
+      "description": "PromptPay to x4575 นาง ธารีนาถ จันทัน"
+    },
+    {
+      "note": "ประกันรถยนต์ 5812",
+      "description": "โอนไป SCB x4122 บริษัท ศรีกรุงโบรคเกอร์"
+    }
+  ],
+  "ค่าจ้างบริการเว็บไซต์": [
+    {
+      "note": "ค่าบริการสร้างเอกสาร E-Tax 6/12-5/01/24",
+      "description": "Transfer to SCB x4202 บริษัท ฟรีเวชั่น จ"
+    },
+    {
+      "note": "ค่าต่อโปรแกรม Peak",
+      "description": "โอนไป SCB x8058 บริษัท พี ยู ยู เอ็น อิน"
+    },
+    {
+      "note": "ค่าสร้างเอกสารE-Tax 02/24 ค่าใบรับรอง2ปี",
+      "description": "Transfer to SCB x4202 บริษัท ฟรีเวชั่น จ"
+    },
+    {
+      "note": "ค่าสร่้างเอกสาร E-tax  06/4-05/5/67",
+      "description": "Transfer to SCB x4202 บริษัท ฟรีเวชั่น จ"
+    },
+    {
+      "note": "ค่าการตลาด รายปี กับ yellow pages",
+      "description": "โอนไป SCB x2298 บริษัท เทเลอินโฟ มีเดีย"
+    }
+  ],
+  "ค่าเช่ายานพาหนะ": [
+    {
+      "note": "ค่ารถขนของ",
+      "description": "Transfer to SCB x7509 นาย เสฏฐวุฒิ ทรัพย"
+    },
+    {
+      "note": "ค่ารถ 6 ล้อ ขนโต๊ะเก้าอี้ บ่อวิน บอสซั่ม",
+      "description": "โอนไป KBANK x9356 น.ส. นภาวรรณ คำแจ่ม"
+    },
+    {
+      "note": "ค่ารถบรรทุก ขนของไปกลับ โอเชี่ยน",
+      "description": "โอนไป SCB x3901 นาย สิทธิชัย สารมาศ"
+    },
+    {
+      "note": "ค่ารถไปงานแต่งเชฟกิ้ง",
+      "description": "PromptPay to x3250 MR. SOMMART ARUN"
+    },
+    {
+      "note": "ค่าเช่าล่วงหน้า 4 เดือน",
+      "description": "PromptPay to x7400 MR. TAWAT YENKHAM"
+    }
+  ],
+  "ค่าเช่าอุปกรณ์": [
+    {
+      "note": "แท่นพระ 21 ธค แหลมฉบัง",
+      "description": "โอนไป KTB x8710 นายสมควร แตงสวัสดิ์"
+    },
+    {
+      "note": "ค่าเช่าเครื่องล้างจาน",
+      "description": "Transfer to BBL x6372 S.B.CHEMICAL EASTE"
+    },
+    {
+      "note": "แท่นพระ บ้านสวน 24 ธค",
+      "description": "โอนไป KTB x8710 นายสมควร แตงสวัสดิ์"
+    },
+    {
+      "note": "แท่นพระ ปลวกแดง",
+      "description": "โอนไป KTB x8710 นายสมควร แตงสวัสดิ์"
+    },
+    {
+      "note": "แท่นพระ 9 มค ปลวกแดว",
+      "description": "โอนไป KTB x8710 นายสมควร แตงสวัสดิ์"
+    }
+  ],
+  "เงินสมทบประกันสังคม และกองทุนทดแทน": [
+    {
+      "note": "SSO Nov 2023",
+      "description": "EPAY to SOCIAL SECURITY OFFICE"
+    },
+    {
+      "note": "ค่ากองทุนทดแทน 66-67",
+      "description": "Transfer to SCB x2545 นางสาว ขนิษฐา พรมเ"
+    },
+    {
+      "note": "SSO Dec2023",
+      "description": "EPAY to SOCIAL SECURITY OFFICE"
+    },
+    {
+      "note": "SSO Jan 2024",
+      "description": "EPAY to SOCIAL SECURITY OFFICE"
+    },
+    {
+      "note": "sso Feb 2024",
+      "description": "EPAY to SOCIAL SECURITY OFFICE"
+    }
+  ],
+  "เงินเดือน ค่าจ้าง": [
+    {
+      "note": "หนุ่ยเบิก",
+      "description": "PromptPay to x7151 MR. Prathip Mungarsa"
+    },
+    {
+      "note": "ต้อยเบิกไปปิดสินเชื่อ",
+      "description": "โอนไป SCB x6358 นางสาว ฐณัฐชา มะลิสอน"
+    },
+    {
+      "note": "ต้นเบิก",
+      "description": "โอนไป KBANK x8827 นาย ธีรพัฒน์ ช่างหนอง"
+    },
+    {
+      "note": "อ๊อดยืมปิดบัตรเครดิต ผ่อนจ่าย",
+      "description": "โอนไป SCB x3393 นาย ยุทธนา บุญมา"
+    },
+    {
+      "note": "มิ้มเบิกล่วงหน้า",
+      "description": "โอนไป SCB x2545 นางสาว ขนิษฐา พรมเมือง"
+    }
+  ],
+  "ค่าอบรม สัมมนา": [
+    {
+      "note": "ค่าอบรม รถไฟฟ้า",
+      "description": "โอนไป SCB x1722 บริษัท บี-ชาร์จ จำกัด"
+    },
+    {
+      "note": "ค่าอบรมณ์ดับเพลิง",
+      "description": "Transfer to TTB x3497 ASIA PACIFIC"
+    },
+    {
+      "note": "ค่าฝึกอบรมซ้อมดับเพลิงปี 2568",
+      "description": "Transfer to SCB x2537 นาย ยศพัทธ์ สุวรรณ"
+    },
+    {
+      "note": "เรียนงานไม้",
+      "description": "Transfer to KBANK x6018 MR. BOONTHONG KA"
+    },
+    {
+      "note": "course online",
+      "description": "Transfer to KBANK x1110 MR. Phudit Aemdi"
+    }
+  ],
+  "เจ้าหนี้สรรพากร": [
+    {
+      "note": "ภาษี",
+      "description": "จ่ายบิล REVENUE DEPARTMENT"
+    },
+    {
+      "note": "ภงด 3 ภงด53",
+      "description": "จ่ายบิล REVENUE DEPARTMENT"
+    },
+    {
+      "note": "ภพ 30",
+      "description": "จ่ายบิล REVENUE DEPARTMENT"
+    },
+    {
+      "note": "ค่าปรับ ภ.ง.ด.51 ปี66",
+      "description": "Transfer to KBANK x7147 MS. KHANIDTHA PR"
+    },
+    {
+      "note": "ค่าภพ.30 ด.3/68 ไอริส",
+      "description": "จ่ายบิล REVENUE DEPARTMENT"
+    }
+  ],
+  "เงินเดือนค้างจ่าย": [
+    {
+      "note": "เน็ตเบิกล่วงหน้า เปลี่ยนยางรถ หักกลางเดื",
+      "description": "โอนไป SCB x7509 นาย เสฏฐวุฒิ ทรัพย์ประเส"
+    },
+    {
+      "note": "Incentive Mar 2024",
+      "description": "PAY 240430094025   20240430"
+    },
+    {
+      "note": "ประกันรถเน็ต ผ่อน 10 เดือน",
+      "description": "Transfer to SCB x4122 บริษัท ศรีกรุงโบรค"
+    },
+    {
+      "note": "เซี๊ยะ เบิกกลางเดือน",
+      "description": "Transfer to SCB x6521 นางสาว ยุพดี นิ่มล"
+    },
+    {
+      "note": "แมวล้างจาน เบิกล่วงหน้า",
+      "description": "Transfer to SCB x2267 นางสาว วรรณี พิมพ์"
+    }
+  ],
+  "ต้นทุนการก่อสร้าง": [
+    {
+      "note": "ค่าเทปูน ลานจอดรถ",
+      "description": "จ่ายบิล CPAC TaLuang"
+    },
+    {
+      "note": "อุปกรณ์ช่าง",
+      "description": "Transfer to KBANK x3176 RUNG STELL PRODU"
+    },
+    {
+      "note": "ค่าทินเนอร์ 1 ปี๊บ",
+      "description": "Transfer to KBANK x3176 RUNG STELL PRODU"
+    },
+    {
+      "note": "เ้หล็กหลังคา เหล็กผนัง",
+      "description": "Transfer to KBANK x3176 RUNG STELL PRODU"
+    },
+    {
+      "note": "ปูน1 คิว",
+      "description": "Transfer to SCB x6442 นาย ธีระภัทร์ พิมค"
+    }
+  ],
+  "ค่ารักษาความปลอดภัย": [
+    {
+      "note": "ค่า รักษาความปลอดภัย รอบ 11-30.6.24",
+      "description": "Transfer to BAY x9070 SECURITY YOTH"
+    },
+    {
+      "note": "ค่า รปภ. เดือนกรกฎาคม 2567",
+      "description": "Transfer to BAY x9070 SECURITY YOTH"
+    },
+    {
+      "note": "ค่ารักษาความปลอดภัย 1-31 สิงหาคม 67",
+      "description": "Transfer to BAY x9070 SECURITY YOTH"
+    },
+    {
+      "note": "ค่าบริการรักษาความปลอดภัย เดือน มิ.ย 68",
+      "description": "Transfer to BAY x9070 SECURITY YOTH"
+    },
+    {
+      "note": "บริษัท รักษาความปลอดภัย ก.ค 2568",
+      "description": "Transfer to BAY x9070 SECURITY YOTH"
+    }
+  ],
+  "ค่าขนส่งสินค้า": [
+    {
+      "note": "ค่าขนส่งน้ำยาคอมบิโอเว่น ที่บางประกง",
+      "description": "PromptPay to x7400 MR. TAWAT YENKHAM"
+    },
+    {
+      "note": "จ่ายเพิ่มค่าขนส่ง สายสิญจน์ด้ายดิบ",
+      "description": "Transfer to BBL x5558 NIM THIPNOI"
+    },
+    {
+      "note": "ค่าขนส่งถ้วย จาน ช้อน",
+      "description": "Transfer to KBANK x5345 MS. NAPAPORN TAB"
+    },
+    {
+      "note": "ค่าขนส่งห้องเย็น",
+      "description": "Transfer to SCB x3875 นางสาว สุมาลี อุดเ"
+    },
+    {
+      "note": "ค่าขนส่งอัสนะ",
+      "description": "PromptPay to x0705 MR.NOPPAKORN PUENGJEN"
+    }
+  ],
+  "เงินปันผล": [
+    {
+      "note": "จ่ายหนี้50k ดอกเบี้ย20kเช่าห้อง2k",
+      "description": "Transfer to BBL x9560 MS NAMFON WONGSUWA"
+    },
+    {
+      "note": "ปันผลรายเดือนและใช้หนี้",
+      "description": "Transfer to BBL x9560 MS NAMFON WONGSUWA"
+    },
+    {
+      "note": "คุณฝน",
+      "description": "Transfer to BBL x9560 MS NAMFON WONGSUWA"
+    },
+    {
+      "note": "ปันผล 27,000 และใช้หนี้ 50,000",
+      "description": "Transfer to BBL x9560 MS NAMFON WONGSUWA"
+    },
+    {
+      "note": "ผลตอบแทน 27000 คืนหนี้ 50000",
+      "description": "Transfer to BBL x9560 MS NAMFON WONGSUWA"
+    }
+  ],
+  "ประกันสังคมค้างจ่าย": [
+    {
+      "note": "SSO ต่างด้วย้อนหลัง",
+      "description": "EPAY to SOCIAL SECURITY OFFICE"
+    },
+    {
+      "note": "SSO Aug 2024",
+      "description": "EPAY to SOCIAL SECURITY OFFICE"
+    },
+    {
+      "note": "Sso Sep 2024",
+      "description": "EPAY to SOCIAL SECURITY OFFICE"
+    },
+    {
+      "note": "SSO Nov 2024",
+      "description": "EPAY to SOCIAL SECURITY OFFICE"
+    },
+    {
+      "note": "SSO Dec 2024",
+      "description": "EPAY to SOCIAL SECURITY OFFICE"
+    }
+  ],
+  "อุปกรณ์ของใช้งานจัดเลี้ยง-ช่าง": [
+    {
+      "note": "อุปกรณ์network",
+      "description": "Transfer to KTB x7895 MISS THIDA LUANGON"
+    },
+    {
+      "note": "ลำโพง-แอมป์",
+      "description": "Transfer to BAY x5597 PHURILAP SURI"
+    },
+    {
+      "note": "ค่าสีและกระดาษทราย",
+      "description": "Transfer to SCB x2678 นาย สรรเสริญ ชาวบ้"
+    },
+    {
+      "note": "ค่าอุปกรณ์ไฟฟ้า",
+      "description": "Transfer to KBANK x5120 KLUNGFAIFA PATTA"
+    },
+    {
+      "note": "ค่าเครื่อง CNC งวดที่ 3",
+      "description": "Transfer to KBANK x1335 MR. PANUPONG LOY"
+    }
+  ],
+  "วัสดุสิ้นเปลืองงานแต่ง-ค่าใช้จ่ายงานแต่ง": [
+    {
+      "note": "นายพิธี งาน 4 5 มค",
+      "description": "Transfer to KBANK x8636 MS. Nattanan Kun"
+    },
+    {
+      "note": "ไม้อัด",
+      "description": "PromptPay to x9010 CHINNAKRIT SRISONG"
+    },
+    {
+      "note": "ค่าป้ายไวนิล 120*50 งานแต่ง25",
+      "description": "Transfer to KBANK x1101 MR.SERMSAK TUMTH"
+    },
+    {
+      "note": "ค่าอุปกรณ์ทำฉากงานแต่ง/บวช",
+      "description": "PromptPay to x3142 MR NIPOL POLTHANI"
+    },
+    {
+      "note": "ป้ายโฟม 22 กพ",
+      "description": "Transfer to SCB x5514 นางสาว อทิตยา ล้อม"
+    }
+  ],
+  "อุปกรณ์ของใช้งานจัดเลี้ยง-FB": [
+    {
+      "note": "อาสนะ โต๊ะหมู่บางปะกง",
+      "description": "Transfer to BBL x3916 SUPHAPHORN CHIWARU"
+    },
+    {
+      "note": "warmerและพอต",
+      "description": "Transfer to KBANK x6573 MRS. POUNGCHOMPO"
+    },
+    {
+      "note": "ชุดลายคราม",
+      "description": "Transfer to BBL x9078 THONGYU BUAWBANGKE"
+    },
+    {
+      "note": "ค่ากาต้มน้ำร้อน กล่องอเนกประสงค์ FB",
+      "description": "Transfer to SCB x3901 นาย สิทธิชัย สารมา"
+    },
+    {
+      "note": "ผ้าปู 1.8 ม สีแชมเปญ 40 ผืน",
+      "description": "Transfer to SCB x6399 บริษัท เพอร์เฟค กร"
+    }
+  ],
+  "อุปกรณ์ของใช้งานจัดเลี้ยง-ครัว": [
+    {
+      "note": "เครื่องปั่นครัวเตรียม2",
+      "description": "Transfer to KBANK x1321 MR. POOM KAEWON"
+    },
+    {
+      "note": "ค่าหม้อหุงข้าว 2 ใบ สาขาบางปะกง",
+      "description": "Transfer to KBANK x2477 LUCKY FLAME CO.,"
+    },
+    {
+      "note": "อุปกรณ์ ครัวบางปะกง",
+      "description": "Transfer to KBANK x6573 MRS. POUNGCHOMPO"
+    },
+    {
+      "note": "ค่าลังหูเหล็กสีเหลือง/น้ำเงิน  บางปะกง",
+      "description": "โอนไป KBANK x0433 บจก. สหศิลป์ไฮเทค"
+    },
+    {
+      "note": "เบิกคืนอุปกร์ครัว แมคโคร",
+      "description": "Transfer to KBANK x1321 MR. POOM KAEWON"
+    }
+  ],
+  "ค่าบริการโฮสติ้ง และเว็บไซต์": [
+    {
+      "note": "ค่าสร้างเอกสาร E-Tax รอบ06/06-05/07/25",
+      "description": "Transfer to SCB x4202 บริษัท ฟรีเวชั่น จ"
+    },
+    {
+      "note": "บริการสร้างเอกสาร E-Taxรอบ 6/10-5/11/25",
+      "description": "จ่ายบิล FREVATION"
+    },
+    {
+      "note": "trello",
+      "description": "Transfer to UOB x3855 MR. POOM KAEWON"
+    },
+    {
+      "note": "adobe subscriptions 2 account",
+      "description": "Transfer to BAY x5862 POOM KAEWON"
+    },
+    {
+      "note": "first choice",
+      "description": "Transfer to BAY x5862 POOM KAEWON"
+    }
+  ],
+  "ค่าโฆษณา Facebook Ads": [
+    {
+      "note": "fb ads1",
+      "description": "Transfer to UOB x3855 MR. POOM KAEWON"
+    },
+    {
+      "note": "fb ads2",
+      "description": "Transfer to BAY x5862 POOM KAEWON"
+    },
+    {
+      "note": "fb ads 1",
+      "description": "โอนไป UOB x3855 นาย ภูมิ แก้วอ่อน"
+    },
+    {
+      "note": "fb ads 2",
+      "description": "โอนไป BAY x5862 นาย ภูมิ แก้วอ่อน"
+    },
+    {
+      "note": "Facebook ads",
+      "description": "Transfer to BAY x5862 POOM KAEWON"
+    }
+  ],
+  "ค่าใช้จ่ายส่วนตัว-ภูมิ": [
+    {
+      "note": "บ้านอุบล",
+      "description": "โอนไป SCB x2590 นาย ภูมิ แก้วอ่อน"
+    },
+    {
+      "note": "uob cc",
+      "description": "Transfer to UOB x3855 MR. POOM KAEWON"
+    },
+    {
+      "note": "first choice",
+      "description": "Transfer to BAY x5862 POOM KAEWON"
+    },
+    {
+      "note": "true money",
+      "description": "Transfer to SCB x2590 นาย ภูมิ แก้วอ่อน"
+    },
+    {
+      "note": "SUBSCRIPTION-sOFTWARE",
+      "description": "Transfer to BAY x5862 POOM KAEWON"
+    }
+  ],
+  "ค่าใช้จ่ายส่วนตัว-ศิริ": [
+    {
+      "note": "บัตร cash plus",
+      "description": "Transfer to UOB x1702 MISS SIRI KETPRASA"
+    },
+    {
+      "note": "ค่าบัตร uob cc",
+      "description": "Transfer to UOB x1702 MISS SIRI KETPRASA"
+    },
+    {
+      "note": "honda",
+      "description": "Transfer to CIMB x9754 SIRI KETPRASAT"
+    },
+    {
+      "note": "shopee pay",
+      "description": "โอนไป KBANK x0465 น.ส. ศิริ เกตุประสาท"
+    },
+    {
+      "note": "ค่าบ้านพฤกษาส่วนต่าง ค่า cc ttb",
+      "description": "โอนไป TTB x3353 น.ส. ศิริ เกตุประสาท"
+    }
+  ],
+  "ชำระหนี้-ศิริ": [
+    {
+      "note": "cc bbl siri",
+      "description": "โอนไป BBL x2665 น.ส. ศิริ เกตุประสาท"
+    },
+    {
+      "note": "maxus",
+      "description": "Transfer to BAY x5862 POOM KAEWON"
+    },
+    {
+      "note": "บ้่านพฤกษา",
+      "description": "โอนไป TTB x3353 น.ส. ศิริ เกตุประสาท"
+    },
+    {
+      "note": "บ้านพัทยาลากูน",
+      "description": "โอนไป CIMB x9754 น.ส. ศิริ เกตุประสาท"
+    },
+    {
+      "note": "cc siri tmb",
+      "description": "โอนไป TTB x3353 น.ส. ศิริ เกตุประสาท"
+    }
+  ],
+  "ชำระหนี้-ภูมิ": [
+    {
+      "note": "finnix",
+      "description": "Transfer to SCB x2590 นาย ภูมิ แก้วอ่อน"
+    },
+    {
+      "note": "scb loan",
+      "description": "Transfer to SCB x2590 นาย ภูมิ แก้วอ่อน"
+    },
+    {
+      "note": "home and bbl",
+      "description": "PromptPay to x8437 MR POOM KAEWON"
+    },
+    {
+      "note": "bill true",
+      "description": "Transfer to SCB x2590 นาย ภูมิ แก้วอ่อน"
+    },
+    {
+      "note": "ปิดยอด bbl loan",
+      "description": "PromptPay to x8437 MR POOM KAEWON"
+    }
+  ],
+  "ค่าโทรศัพท์สำนักงาน": [
+    {
+      "note": "ค่าโทรศัพท์และค่าอินเตอร์เน็ต เดือน พ.ย",
+      "description": "Transfer to SCB x6572 นางสาว นภาพร ทับทิ"
+    },
+    {
+      "note": "ค่าเน็ต ร้าน ด.4-5/67",
+      "description": "Transfer to SCB x6572 นางสาว นภาพร ทับทิ"
+    },
+    {
+      "note": "ค่า ทรศ เครื่องร้าน ค้างยอด 2 เดือน",
+      "description": "Transfer to SCB x2545 นางสาว ขนิษฐา พรมเ"
+    },
+    {
+      "note": "bill true ร้าน",
+      "description": "Transfer to SCB x2590 นาย ภูมิ แก้วอ่อน"
+    }
+  ],
+  "ค่าส่งเสริมการขาย": [
+    {
+      "note": "ค่ายิงads เดือน Jan24",
+      "description": "Transfer to KBANK x2621 MS. ORNICHA  SRI"
+    },
+    {
+      "note": "ค่าการตลาด เดือน ม.ค/เม.ย /พ.ค 2566",
+      "description": "Transfer to KBANK x2621 MS. ORNICHA  SRI"
+    },
+    {
+      "note": "ค่าโบว์ชัวร์ แผนกเซลล์การตลาด",
+      "description": "Transfer to KBANK x2543 TUMTOOK CO.,LTD."
+    },
+    {
+      "note": "ค่าแนะนำงาน 9 ธค 73 โต๊ะ",
+      "description": "โอนไป SCB x6132 นาย อำนาจ เจริญประกอบ"
+    }
+  ],
+  "ค่าโฆษณา Google Adwords": [
+    {
+      "note": "fb3",
+      "description": "Transfer to BAY x5862 POOM KAEWON"
+    },
+    {
+      "note": "google ads",
+      "description": "โอนไป BAY x5862 นาย ภูมิ แก้วอ่อน"
+    },
+    {
+      "note": "gg ads",
+      "description": "Transfer to BAY x5862 POOM KAEWON"
+    },
+    {
+      "note": "cc siri",
+      "description": "Transfer to UOB x3855 MR. POOM KAEWON"
+    }
+  ],
+  "ค่าทางด่วน": [
+    {
+      "note": "สำรอง mpass",
+      "description": "Transfer to KTB x5969 MISSSIRI KETPRASAT"
+    },
+    {
+      "note": "เติม mpass บริษัท",
+      "description": "Transfer to KTB x5969 MISSSIRI KETPRASAT"
+    },
+    {
+      "note": "สำรองค่า mpass",
+      "description": "Transfer to KTB x5969 MISSSIRI KETPRASAT"
+    },
+    {
+      "note": "สำรองmpass",
+      "description": "Transfer to KTB x5969 MISSSIRI KETPRASAT"
+    }
+  ],
+  "ภาษีถูกหัก ณ ที่จ่าย": [
+    {
+      "note": "ค่าภาษี ภงด.53",
+      "description": "จ่ายบิล REVENUE DEPARTMENT"
+    },
+    {
+      "note": "ภงด.3/53",
+      "description": "จ่ายบิล REVENUE DEPARTMENT"
+    },
+    {
+      "note": "ภงด 3 ภงด 53",
+      "description": "จ่ายบิล REVENUE DEPARTMENT"
+    }
+  ],
+  "ค่าอุปกรณ์และเครื่องใช้สำนักงาน": [
+    {
+      "note": "ค่าเช่าเครื่องถ่ายเอกสาร งวดที่ 11",
+      "description": "Transfer to KBANK x9510 DIGITAL OFFICE S"
+    },
+    {
+      "note": "ค่าจอคอม พี่หนุ่ย",
+      "description": "Transfer to KBANK x7414 MS. Pemika Samri"
+    },
+    {
+      "note": "อุปกรณ์it",
+      "description": "Transfer to SCB x0739 ซันคอมพิวเตอร์ โดย"
+    }
+  ],
+  "ค่าโฆษณาออนไลน์อื่น": [
+    {
+      "note": "ค่าการตลาดออนไลน์ รอบ20/12/23",
+      "description": "Transfer to KBANK x2040 INSIGHTOUT SERVI"
+    },
+    {
+      "note": "agency -chon-content-Feb-March",
+      "description": "Transfer to KBANK x2040 INSIGHTOUT SERVI"
+    },
+    {
+      "note": "ยิงads",
+      "description": "Transfer to KBANK x2621 MS. ORNICHA  SRI"
+    }
+  ],
+  "ค่าธรรมเนียมอื่นๆ": [
+    {
+      "note": "ค่าธรรมเนียมใบอนุญาติขายอาหาร1 ปี",
+      "description": "โอนไป SCB x2545 นางสาว ขนิษฐา พรมเมือง"
+    },
+    {
+      "note": "ต่อใบอนุญาตจำหน่ายสุรา",
+      "description": "จ่ายบิล EXCISE DEPARTMENT"
+    }
+  ],
+  "ค่าโฆษณาอื่นๆ": [
+    {
+      "note": "ค่ารีวิว พย",
+      "description": "โอนไป SCB x3393 นาย ยุทธนา บุญมา"
+    },
+    {
+      "note": "นายพิธีสงฆ์ ค่าแนะนำงาน บ่อวิน 26 มค",
+      "description": "โอนไป SCB x0257 นางสาว ปานรดา เกษมวราสิร"
+    }
+  ],
+  "เงินสด": [
+    {
+      "note": "เบิก",
+      "description": "PromptPay to x1513 MR SARAWUT KHUNHAN"
+    },
+    {
+      "note": "petty cash ช่วงปีใหม่",
+      "description": "โอนไป SCB x3901 นาย สิทธิชัย สารมาศ"
+    }
+  ],
+  "ภาษีขาย ภ.พ.30": [
+    {
+      "note": "ภาษี ภพ.30",
+      "description": "จ่ายบิล REVENUE DEPARTMENT"
+    },
+    {
+      "note": "ค่า ภพ.30 ด.10/68",
+      "description": "จ่ายบิล REVENUE DEPARTMENT"
+    }
+  ],
+  "ค่าสวัสดิการอาหาร เครื่องดื่ม": [
+    {
+      "note": "ค่าอาหารพนักงาน",
+      "description": "Transfer to SCB x6572 นางสาว นภาพร ทับทิ"
+    },
+    {
+      "note": "เบียร์สดงานสต๊าฟ 30 ลิตร 2 ถัง",
+      "description": "Transfer to KBANK x8387 SUPHAMITR STORE"
+    }
+  ],
+  "อุปกรณ์ของใช้งานจัดเลี้ยง-Back-office": [
+    {
+      "note": "เมาส์คีย์บอร์ดเครื่องใหม่",
+      "description": "Transfer to SCB x6168 บริษัท เจ.ไอ.บี.คอ"
+    },
+    {
+      "note": "ชั้นวาง",
+      "description": "PromptPay to x0422 MR.THANACHAI  SOMKID"
+    }
+  ],
+  "ค่าบริการคลาวด์เซอร์วิซ": [
+    {
+      "note": "ต่อโปร Human Soft 6ก.ย-5ต.ค 25",
+      "description": "Transfer to KBANK x9563 HUMAN SOFT CO.,L"
+    },
+    {
+      "note": "ต่ออายุ Humansoft 10 ตค-9พย 68",
+      "description": "Transfer to KBANK x9563 HUMAN SOFT CO.,L"
+    }
+  ],
+  "สำรองจ่ายแทนกิจการที่ยังไม่ได้คืนเงิน - ภูมิ": [
+    {
+      "note": "ชล เดคคอร์",
+      "description": "Transfer to KBANK x1321 MR. POOM KAEWON"
+    },
+    {
+      "note": "ชล ยืม",
+      "description": "Transfer to KBANK x1321 MR. POOM KAEWON"
+    }
+  ]
+}

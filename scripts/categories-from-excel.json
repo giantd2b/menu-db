@@ -1,0 +1,458 @@
+[
+  {
+    "name": "ต้นทุนการให้บริการ",
+    "description": "2461 รายการ",
+    "color": "#ef4444",
+    "count": 2461
+  },
+  {
+    "name": "ค่ารถรับส่งพระ",
+    "description": "1449 รายการ",
+    "color": "#f97316",
+    "count": 1449
+  },
+  {
+    "name": "ค่าจ้างพนักงานชั่วคราว",
+    "description": "795 รายการ",
+    "color": "#f59e0b",
+    "count": 795
+  },
+  {
+    "name": "ค่าใช้จ่ายอื่น",
+    "description": "627 รายการ",
+    "color": "#eab308",
+    "count": 627
+  },
+  {
+    "name": "ค่าน้ำมัน",
+    "description": "410 รายการ",
+    "color": "#84cc16",
+    "count": 410
+  },
+  {
+    "name": "เงินเดือน ค่าจ้าง",
+    "description": "356 รายการ",
+    "color": "#22c55e",
+    "count": 356
+  },
+  {
+    "name": "ค่าเช่าเต้นท์-โต๊ะ-เก้าอี้",
+    "description": "355 รายการ",
+    "color": "#10b981",
+    "count": 355
+  },
+  {
+    "name": "เจ้าหนี้เช่าซื้อ",
+    "description": "319 รายการ",
+    "color": "#14b8a6",
+    "count": 319
+  },
+  {
+    "name": "ต้นทุนการก่อสร้าง",
+    "description": "215 รายการ",
+    "color": "#06b6d4",
+    "count": 215
+  },
+  {
+    "name": "ค่าใช้จ่ายส่วนตัว-ภูมิ",
+    "description": "208 รายการ",
+    "color": "#0ea5e9",
+    "count": 208
+  },
+  {
+    "name": "ค่าสวัสดิการอื่นๆ",
+    "description": "206 รายการ",
+    "color": "#3b82f6",
+    "count": 206
+  },
+  {
+    "name": "ค่าซ่อมแซม",
+    "description": "178 รายการ",
+    "color": "#6366f1",
+    "count": 178
+  },
+  {
+    "name": "อุปกรณ์ของใช้งานจัดเลี้ยง",
+    "description": "145 รายการ",
+    "color": "#8b5cf6",
+    "count": 145
+  },
+  {
+    "name": "สินทรัพย์ไม่หมุนเวียนอื่น",
+    "description": "138 รายการ",
+    "color": "#a855f7",
+    "count": 138
+  },
+  {
+    "name": "ค่าใช้จ่ายส่วนตัว-ศิริ",
+    "description": "128 รายการ",
+    "color": "#d946ef",
+    "count": 128
+  },
+  {
+    "name": "ชำระหนี้-ศิริ",
+    "description": "98 รายการ",
+    "color": "#ec4899",
+    "count": 98
+  },
+  {
+    "name": "อุปกรณ์ของใช้งานจัดเลี้ยง-FB",
+    "description": "92 รายการ",
+    "color": "#f43f5e",
+    "count": 92
+  },
+  {
+    "name": "ค่าเช่าอุปกรณ์",
+    "description": "88 รายการ",
+    "color": "#64748b",
+    "count": 88
+  },
+  {
+    "name": "ชำระหนี้-ภูมิ",
+    "description": "86 รายการ",
+    "color": "#78716c",
+    "count": 86
+  },
+  {
+    "name": "อุปกรณ์ของใช้งานจัดเลี้ยง-ช่าง",
+    "description": "76 รายการ",
+    "color": "#71717a",
+    "count": 76
+  },
+  {
+    "name": "ค่าเช่าสำนักงาน",
+    "description": "72 รายการ",
+    "color": "#ef4444",
+    "count": 72
+  },
+  {
+    "name": "ค่าโฆษณา Google Adwords",
+    "description": "71 รายการ",
+    "color": "#f97316",
+    "count": 71
+  },
+  {
+    "name": "วัสดุสิ้นเปลืองงานแต่ง-ค่าใช้จ่ายงานแต่ง",
+    "description": "62 รายการ",
+    "color": "#f59e0b",
+    "count": 62
+  },
+  {
+    "name": "ค่าจ้างบริการเว็บไซต์",
+    "description": "56 รายการ",
+    "color": "#eab308",
+    "count": 56
+  },
+  {
+    "name": "เจ้าหนี้สรรพากร",
+    "description": "50 รายการ",
+    "color": "#84cc16",
+    "count": 50
+  },
+  {
+    "name": "ค่าโฆษณา Facebook Ads",
+    "description": "47 รายการ",
+    "color": "#22c55e",
+    "count": 47
+  },
+  {
+    "name": "เงินปันผล",
+    "description": "45 รายการ",
+    "color": "#10b981",
+    "count": 45
+  },
+  {
+    "name": "เงินจ่ายล่วงหน้า - เงินมัดจำ",
+    "description": "33 รายการ",
+    "color": "#14b8a6",
+    "count": 33
+  },
+  {
+    "name": "ค่าธรรมเนียมธนาคาร",
+    "description": "33 รายการ",
+    "color": "#06b6d4",
+    "count": 33
+  },
+  {
+    "name": "ค่าโทรศัพท์สำนักงาน",
+    "description": "29 รายการ",
+    "color": "#0ea5e9",
+    "count": 29
+  },
+  {
+    "name": "ค่าตวจสอบสภาพรถและภาษียานภาหนะ",
+    "description": "28 รายการ",
+    "color": "#3b82f6",
+    "count": 28
+  },
+  {
+    "name": "ค่าไฟฟ้า",
+    "description": "27 รายการ",
+    "color": "#6366f1",
+    "count": 27
+  },
+  {
+    "name": "ค่าบริการอื่นๆ",
+    "description": "26 รายการ",
+    "color": "#8b5cf6",
+    "count": 26
+  },
+  {
+    "name": "ประกันสังคมค้างจ่าย",
+    "description": "23 รายการ",
+    "color": "#a855f7",
+    "count": 23
+  },
+  {
+    "name": "อุปกรณ์ของใช้งานจัดเลี้ยง-ครัว",
+    "description": "23 รายการ",
+    "color": "#d946ef",
+    "count": 23
+  },
+  {
+    "name": "ค่าจ้างที่ปรึกษาการตลาด",
+    "description": "22 รายการ",
+    "color": "#ec4899",
+    "count": 22
+  },
+  {
+    "name": "ค่าทางด่วน",
+    "description": "21 รายการ",
+    "color": "#f43f5e",
+    "count": 21
+  },
+  {
+    "name": "ค่าขนส่งสินค้า",
+    "description": "20 รายการ",
+    "color": "#64748b",
+    "count": 20
+  },
+  {
+    "name": "ค่ารักษาความปลอดภัย",
+    "description": "17 รายการ",
+    "color": "#78716c",
+    "count": 17
+  },
+  {
+    "name": "ค่าเช่ายานพาหนะ",
+    "description": "16 รายการ",
+    "color": "#71717a",
+    "count": 16
+  },
+  {
+    "name": "เงินสมทบประกันสังคม และกองทุนทดแทน",
+    "description": "12 รายการ",
+    "color": "#ef4444",
+    "count": 12
+  },
+  {
+    "name": "ค่าธรรมเนียมอื่นๆ",
+    "description": "11 รายการ",
+    "color": "#f97316",
+    "count": 11
+  },
+  {
+    "name": "เงินสด",
+    "description": "10 รายการ",
+    "color": "#f59e0b",
+    "count": 10
+  },
+  {
+    "name": "เงินเดือนค้างจ่าย",
+    "description": "10 รายการ",
+    "color": "#eab308",
+    "count": 10
+  },
+  {
+    "name": "ค่าบริการโฮสติ้ง และเว็บไซต์",
+    "description": "10 รายการ",
+    "color": "#84cc16",
+    "count": 10
+  },
+  {
+    "name": "ค่าโฆษณาออนไลน์อื่น",
+    "description": "8 รายการ",
+    "color": "#22c55e",
+    "count": 8
+  },
+  {
+    "name": "ค่าตอบแทนกรรมการ",
+    "description": "6 รายการ",
+    "color": "#10b981",
+    "count": 6
+  },
+  {
+    "name": "ค่าอบรม สัมมนา",
+    "description": "5 รายการ",
+    "color": "#14b8a6",
+    "count": 5
+  },
+  {
+    "name": "ภาษีขาย ภ.พ.30",
+    "description": "5 รายการ",
+    "color": "#06b6d4",
+    "count": 5
+  },
+  {
+    "name": "ภาษีถูกหัก ณ ที่จ่าย",
+    "description": "4 รายการ",
+    "color": "#0ea5e9",
+    "count": 4
+  },
+  {
+    "name": "ค่าส่งเสริมการขาย",
+    "description": "4 รายการ",
+    "color": "#3b82f6",
+    "count": 4
+  },
+  {
+    "name": "ค่าบริการคลาวด์เซอร์วิซ",
+    "description": "4 รายการ",
+    "color": "#6366f1",
+    "count": 4
+  },
+  {
+    "name": "สำรองจ่ายแทนกิจการที่ยังไม่ได้คืนเงิน - ภูมิ",
+    "description": "4 รายการ",
+    "color": "#8b5cf6",
+    "count": 4
+  },
+  {
+    "name": "ค่าอุปกรณ์และเครื่องใช้สำนักงาน",
+    "description": "3 รายการ",
+    "color": "#a855f7",
+    "count": 3
+  },
+  {
+    "name": "ค่าบริการสอบบัญชี",
+    "description": "3 รายการ",
+    "color": "#d946ef",
+    "count": 3
+  },
+  {
+    "name": "ค่าสวัสดิการอาหาร เครื่องดื่ม",
+    "description": "3 รายการ",
+    "color": "#ec4899",
+    "count": 3
+  },
+  {
+    "name": "อุปกรณ์ของใช้งานจัดเลี้ยง-Back-office",
+    "description": "3 รายการ",
+    "color": "#f43f5e",
+    "count": 3
+  },
+  {
+    "name": "ค่ารักษาความสะอาด",
+    "description": "2 รายการ",
+    "color": "#64748b",
+    "count": 2
+  },
+  {
+    "name": "ค่าโฆษณาอื่นๆ",
+    "description": "2 รายการ",
+    "color": "#78716c",
+    "count": 2
+  },
+  {
+    "name": "ภาษีเงินได้",
+    "description": "2 รายการ",
+    "color": "#71717a",
+    "count": 2
+  },
+  {
+    "name": "ภาษีโรงเรือนและสิ่งปลูกสร้าง",
+    "description": "2 รายการ",
+    "color": "#ef4444",
+    "count": 2
+  },
+  {
+    "name": "เงินรับล่วงหน้า - เงินมัดจำ",
+    "description": "2 รายการ",
+    "color": "#f97316",
+    "count": 2
+  },
+  {
+    "name": "ค่าเบี้ยเลี้ยงเดินทาง",
+    "description": "1 รายการ",
+    "color": "#f59e0b",
+    "count": 1
+  },
+  {
+    "name": "ค่าบริการบัญชี",
+    "description": "1 รายการ",
+    "color": "#eab308",
+    "count": 1
+  },
+  {
+    "name": "เจ้าหนี้-ค่างวดรถ ยจ6170",
+    "description": "1 รายการ",
+    "color": "#84cc16",
+    "count": 1
+  },
+  {
+    "name": "เจ้าหนี้-ค่างวดรถ 2ฒฬ1816",
+    "description": "1 รายการ",
+    "color": "#22c55e",
+    "count": 1
+  },
+  {
+    "name": "เจ้าหนี้-ค่างวดรถ ยจ9612",
+    "description": "1 รายการ",
+    "color": "#10b981",
+    "count": 1
+  },
+  {
+    "name": "วัสดุสิ้นเปลืองงานแต่ง",
+    "description": "1 รายการ",
+    "color": "#14b8a6",
+    "count": 1
+  },
+  {
+    "name": "อุปกรณ์ของใช้งานจัดเลี้ยง-งานแต่ง",
+    "description": "1 รายการ",
+    "color": "#06b6d4",
+    "count": 1
+  },
+  {
+    "name": "ภาษีบำรุงท้องที่",
+    "description": "1 รายการ",
+    "color": "#0ea5e9",
+    "count": 1
+  },
+  {
+    "name": "เงินลงทุนในบริษัทย่อย",
+    "description": "1 รายการ",
+    "color": "#3b82f6",
+    "count": 1
+  },
+  {
+    "name": "โบนัส",
+    "description": "1 รายการ",
+    "color": "#6366f1",
+    "count": 1
+  },
+  {
+    "name": "เงินลงทุนเผื่อขาย",
+    "description": "1 รายการ",
+    "color": "#8b5cf6",
+    "count": 1
+  },
+  {
+    "name": "ค่าจ้างผลิตสื่อโฆษณา",
+    "description": "1 รายการ",
+    "color": "#a855f7",
+    "count": 1
+  },
+  {
+    "name": "ค่าประปา",
+    "description": "1 รายการ",
+    "color": "#d946ef",
+    "count": 1
+  },
+  {
+    "name": "ภาษีเงินได้ค้างจ่าย",
+    "description": "1 รายการ",
+    "color": "#ec4899",
+    "count": 1
+  }
+]
