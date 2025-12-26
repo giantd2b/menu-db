@@ -7,6 +7,7 @@ import {
   type RawTransactionRow,
   type CleanedTransaction
 } from '@/lib/utils/clean-data'
+import { categorizeTransaction } from '@/lib/utils/categorize'
 import { categorizeWithAI } from '@/lib/services/ai-categorize'
 
 /**
@@ -146,26 +147,37 @@ export async function previewTransactions(formData: FormData): Promise<PreviewRe
         aiConfidence = 'high'
         aiReasoning = 'ระบุจากไฟล์ต้นฉบับ'
       }
-      // ถ้าเป็น withdrawal ให้ AI จัดหมวดหมู่
+      // ถ้าเป็น withdrawal ให้จัดหมวดหมู่
       else if (transaction.withdrawal && transaction.withdrawal > 0) {
-        try {
-          const result = await categorizeWithAI({
-            note: transaction.note || '',
-            description: `${transaction.description || ''} ${transaction.rawDescription || ''}`,
-            withdrawal: transaction.withdrawal,
-          })
+        // 1. ลองใช้ hardcoded rules ก่อน (เร็วกว่า)
+        const ruleCategory = categorizeTransaction(transaction)
 
-          if (result) {
-            aiCategory = result.category
-            aiConfidence = result.confidence
-            aiReasoning = result.reasoning
+        if (ruleCategory !== 'ไม่ระบุ') {
+          // Rules matched - ใช้ผลลัพธ์จาก rules
+          aiCategory = ruleCategory
+          aiConfidence = 'high'
+          aiReasoning = 'ตรงกับกฎที่กำหนด'
+        } else {
+          // 2. ถ้า rules ไม่ match ให้ใช้ AI
+          try {
+            const result = await categorizeWithAI({
+              note: transaction.note || '',
+              description: `${transaction.description || ''} ${transaction.rawDescription || ''}`,
+              withdrawal: transaction.withdrawal,
+            })
+
+            if (result) {
+              aiCategory = result.category
+              aiConfidence = result.confidence
+              aiReasoning = result.reasoning
+            }
+          } catch (error) {
+            console.error('AI error:', error)
           }
-        } catch (error) {
-          console.error('AI error:', error)
-        }
 
-        // Delay เพื่อไม่ให้ rate limit
-        await new Promise(resolve => setTimeout(resolve, 100))
+          // Delay เพื่อไม่ให้ rate limit
+          await new Promise(resolve => setTimeout(resolve, 100))
+        }
       }
 
       previews.push({

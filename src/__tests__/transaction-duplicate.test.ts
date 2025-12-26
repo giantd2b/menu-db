@@ -372,4 +372,12 @@ describe('Inter-Company Transfer Categorization', () => {
     const tx = createMockTransaction('โอนเงินให้พนักงาน')
     expect(categorizeTransaction(tx)).not.toBe('เงินโอนระหว่างบัญชีบริษัท')
   })
+
+  it('should detect ไอริส เติมบุญ in accountName field', () => {
+    const tx = {
+      ...createMockTransaction(''),
+      accountName: 'บริษัท ไอริส เติมบุญ จำกัด',
+    }
+    expect(categorizeTransaction(tx)).toBe('เงินโอนระหว่างบัญชีบริษัท')
+  })
 })
