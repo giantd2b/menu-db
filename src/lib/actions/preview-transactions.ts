@@ -7,7 +7,7 @@ import {
   type RawTransactionRow,
   type CleanedTransaction
 } from '@/lib/utils/clean-data'
-import { categorizeTransaction } from '@/lib/utils/categorize'
+import { categorizeTransaction, categorizeDepositTransaction } from '@/lib/utils/categorize'
 import { categorizeWithAI } from '@/lib/services/ai-categorize'
 
 /**
@@ -122,12 +122,34 @@ export async function previewTransactions(formData: FormData): Promise<PreviewRe
 
     // Clean ข้อมูล
     const cleanedTransactions: CleanedTransaction[] = []
+
+    // Debug: Log first raw row to see column names
+    if (rawRows.length > 0) {
+      console.log('[Preview Debug] First raw row columns:', Object.keys(rawRows[0]))
+      console.log('[Preview Debug] First raw row:', rawRows[0])
+    }
+
     rawRows.forEach((row) => {
       const cleaned = cleanTransactionRow(row)
       if (cleaned) {
         cleanedTransactions.push(cleaned)
       }
     })
+
+    // Debug: Log withdrawal/deposit counts
+    const withdrawalCount = cleanedTransactions.filter(t => t.withdrawal && t.withdrawal > 0).length
+    const depositCount = cleanedTransactions.filter(t => t.deposit && t.deposit > 0).length
+    console.log('[Preview Debug] Parsed transactions:', {
+      total: cleanedTransactions.length,
+      withdrawals: withdrawalCount,
+      deposits: depositCount,
+    })
+
+    // Debug: Log first withdrawal if exists
+    const firstWithdrawal = cleanedTransactions.find(t => t.withdrawal && t.withdrawal > 0)
+    if (firstWithdrawal) {
+      console.log('[Preview Debug] First withdrawal:', firstWithdrawal)
+    }
 
     // แยก withdrawal vs deposit
     const withdrawals = cleanedTransactions.filter(t => t.withdrawal && t.withdrawal > 0)
@@ -147,10 +169,38 @@ export async function previewTransactions(formData: FormData): Promise<PreviewRe
         aiConfidence = 'high'
         aiReasoning = 'ระบุจากไฟล์ต้นฉบับ'
       }
+      // ถ้าเป็น deposit ให้จัดหมวดหมู่ตามยอดเงิน
+      else if (transaction.deposit && transaction.deposit > 0) {
+        const depositCategory = categorizeDepositTransaction(transaction)
+        if (depositCategory) {
+          aiCategory = depositCategory
+          aiConfidence = 'high'
+          // กำหนด reasoning ตาม category
+          if (depositCategory === 'เงินโอนระหว่างบัญชีบริษัท') {
+            aiReasoning = 'โอนระหว่างบริษัท (เติมบุญ/ไอริส)'
+          } else if (depositCategory === 'ยอดมัดจำ') {
+            aiReasoning = `ยอดเงิน ${transaction.deposit.toLocaleString()} ตรงกับยอดมัดจำ (3,000 / 5,000 / 7,000)`
+          } else {
+            aiReasoning = 'รายได้จากการให้บริการ'
+          }
+        }
+      }
       // ถ้าเป็น withdrawal ให้จัดหมวดหมู่
       else if (transaction.withdrawal && transaction.withdrawal > 0) {
         // 1. ลองใช้ hardcoded rules ก่อน (เร็วกว่า)
         const ruleCategory = categorizeTransaction(transaction)
+
+        // Debug: log inter-company patterns
+        const debugText = `${transaction.description} ${transaction.rawDescription} ${transaction.note || ''}`
+        if (debugText.includes('ไอริส') || debugText.includes('เติมบุญ') || debugText.toLowerCase().includes('iris') || debugText.toLowerCase().includes('termboon')) {
+          console.log('[Inter-Company Debug]', {
+            note: transaction.note,
+            description: transaction.description,
+            rawDescription: transaction.rawDescription,
+            detectedCategory: ruleCategory,
+            textChecked: debugText,
+          })
+        }
 
         if (ruleCategory !== 'ไม่ระบุ') {
           // Rules matched - ใช้ผลลัพธ์จาก rules

@@ -145,6 +145,10 @@ export const DEFAULT_CATEGORIES = [
   // === อื่นๆ ===
   { name: 'ค่าใช้จ่ายอื่น', description: 'ค่าใช้จ่ายอื่นๆ ทั่วไป', color: '#94a3b8' },
   { name: 'ไม่ระบุ', description: 'ยังไม่ได้จัดหมวดหมู่', color: '#cbd5e1' },
+
+  // === รายได้ (Deposit) ===
+  { name: 'ยอดมัดจำ', description: 'เงินมัดจำรับจากลูกค้า (3,000 / 5,000 / 7,000)', color: '#22c55e' },
+  { name: 'รายได้ค่าบริการ', description: 'รายได้จากการให้บริการ', color: '#16a34a' },
 ] as const
 
 /**
@@ -450,4 +454,64 @@ export async function categorizeTransactionWithAI(
 
   // Fallback to 'ไม่ระบุ' if AI fails
   return 'ไม่ระบุ'
+}
+
+/**
+ * ยอดมัดจำที่กำหนดไว้
+ */
+const DEPOSIT_AMOUNTS = [3000, 5000, 7000]
+
+/**
+ * Pattern สำหรับตรวจจับเงินโอนระหว่างบริษัท
+ */
+const INTER_COMPANY_PATTERNS = [
+  'เติมบุญ',
+  'ไอริส',
+  'TERMBOON',
+  'IRIS',
+]
+
+/**
+ * ตรวจสอบว่าเป็นเงินโอนระหว่างบริษัทหรือไม่
+ */
+function isInterCompanyTransfer(transaction: CleanedTransaction): boolean {
+  const textToCheck = [
+    transaction.description || '',
+    transaction.rawDescription || '',
+    transaction.note || '',
+  ].join(' ').toLowerCase()
+
+  return INTER_COMPANY_PATTERNS.some(pattern =>
+    textToCheck.includes(pattern.toLowerCase())
+  )
+}
+
+/**
+ * จัดหมวดหมู่ deposit (รายรับ) ตามยอดเงิน
+ * - เงินโอนระหว่างบริษัท (เติมบุญ/ไอริส) → "เงินโอนระหว่างบัญชีบริษัท"
+ * - ยอด 3000, 5000, 7000 → "ยอดมัดจำ"
+ * - ยอดอื่นๆ → "รายได้ค่าบริการ"
+ *
+ * หมายเหตุ: Rule นี้ใช้กับ deposit เท่านั้น ไม่ apply กับ withdrawal
+ * @param transaction - ข้อมูล transaction ที่ cleaned แล้ว
+ * @returns ชื่อ category สำหรับ deposit หรือ null ถ้าไม่ใช่ deposit
+ */
+export function categorizeDepositTransaction(transaction: CleanedTransaction): string | null {
+  // ตรวจสอบว่าเป็น deposit หรือไม่ (มี deposit และ deposit > 0)
+  if (!transaction.deposit || transaction.deposit <= 0) {
+    return null // ไม่ใช่ deposit ให้ return null
+  }
+
+  // Priority 1: ตรวจสอบเงินโอนระหว่างบริษัทก่อน
+  if (isInterCompanyTransfer(transaction)) {
+    return 'เงินโอนระหว่างบัญชีบริษัท'
+  }
+
+  // Priority 2: ตรวจสอบว่ายอดตรงกับยอดมัดจำหรือไม่
+  if (DEPOSIT_AMOUNTS.includes(transaction.deposit)) {
+    return 'ยอดมัดจำ'
+  }
+
+  // Priority 3: ยอดอื่นๆ = รายได้ค่าบริการ
+  return 'รายได้ค่าบริการ'
 }

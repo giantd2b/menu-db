@@ -1,9 +1,17 @@
 'use server'
 
 import { prisma } from '@/lib/prisma'
-import { unstable_cache } from 'next/cache'
+import { unstable_cache, revalidateTag } from 'next/cache'
 
 const CACHE_REVALIDATE_SECONDS = 60 // 1 minute
+const DASHBOARD_CACHE_TAG = 'dashboard-data'
+
+/**
+ * Invalidate all dashboard cache
+ */
+export async function invalidateDashboardCache() {
+  revalidateTag(DASHBOARD_CACHE_TAG)
+}
 
 /**
  * Date range filter
@@ -124,7 +132,7 @@ const getAllAccountsCached = unstable_cache(
     }))
   },
   ['all-accounts'],
-  { revalidate: CACHE_REVALIDATE_SECONDS }
+  { revalidate: CACHE_REVALIDATE_SECONDS, tags: [DASHBOARD_CACHE_TAG] }
 )
 
 export async function getAllAccounts(): Promise<AccountInfo[]> {
@@ -154,7 +162,7 @@ const getAccountInfoCached = unstable_cache(
     }
   },
   ['account-info'],
-  { revalidate: CACHE_REVALIDATE_SECONDS }
+  { revalidate: CACHE_REVALIDATE_SECONDS, tags: [DASHBOARD_CACHE_TAG] }
 )
 
 export async function getAccountInfo(): Promise<AccountInfo | null> {
@@ -226,7 +234,7 @@ export async function getSummaryData(filter?: DateRangeFilter): Promise<SummaryD
   const cachedFn = unstable_cache(
     () => getSummaryDataInternal(filter),
     [cacheKey],
-    { revalidate: CACHE_REVALIDATE_SECONDS }
+    { revalidate: CACHE_REVALIDATE_SECONDS, tags: [DASHBOARD_CACHE_TAG] }
   )
   return cachedFn()
 }
@@ -265,7 +273,7 @@ export async function getBalanceTrend(filter?: DateRangeFilter): Promise<Balance
   const cachedFn = unstable_cache(
     () => getBalanceTrendInternal(filter),
     [cacheKey],
-    { revalidate: CACHE_REVALIDATE_SECONDS }
+    { revalidate: CACHE_REVALIDATE_SECONDS, tags: [DASHBOARD_CACHE_TAG] }
   )
   return cachedFn()
 }
@@ -317,80 +325,149 @@ export async function getExpensesByCategory(filter?: DateRangeFilter): Promise<C
   const cachedFn = unstable_cache(
     () => getExpensesByCategoryInternal(filter),
     [cacheKey],
-    { revalidate: CACHE_REVALIDATE_SECONDS }
+    { revalidate: CACHE_REVALIDATE_SECONDS, tags: [DASHBOARD_CACHE_TAG] }
   )
   return cachedFn()
 }
 
 /**
- * ดึงรายการ Transactions ล่าสุด
+ * Transaction type filter
  */
-async function getRecentTransactionsInternal(
+export type TransactionTypeFilter = 'all' | 'withdrawal' | 'deposit'
+
+/**
+ * Paginated transactions result
+ */
+export interface PaginatedTransactions {
+  data: TransactionData[]
+  total: number
+  page: number
+  pageSize: number
+  totalPages: number
+}
+
+/**
+ * ดึงรายการ Transactions พร้อม pagination
+ */
+async function getTransactionsPaginatedInternal(
+  page: number = 1,
+  pageSize: number = 20,
   categoryFilter?: string,
-  limit: number = 20,
-  filter?: DateRangeFilter
-): Promise<TransactionData[]> {
+  filter?: DateRangeFilter,
+  transactionType?: TransactionTypeFilter
+): Promise<PaginatedTransactions> {
   const where = getFilterWhereClause(filter)
 
   const categoryWhere = categoryFilter && categoryFilter !== 'all'
     ? { category: { name: categoryFilter } }
     : {}
 
-  const transactions = await prisma.transaction.findMany({
-    where: {
-      ...where,
-      ...categoryWhere,
-    },
-    orderBy: { date: 'desc' },
-    take: limit,
-    select: {
-      id: true,
-      date: true,
-      description: true,
-      rawDescription: true,
-      note: true,
-      withdrawal: true,
-      deposit: true,
-      balance: true,
-      accountNumber: true,
-      accountName: true,
-      accountType: true,
-      category: {
-        select: {
-          name: true,
-          color: true,
+  // Add transaction type filter
+  const typeWhere = transactionType === 'withdrawal'
+    ? { withdrawal: { not: null } }
+    : transactionType === 'deposit'
+      ? { deposit: { not: null } }
+      : {}
+
+  const combinedWhere = {
+    ...where,
+    ...categoryWhere,
+    ...typeWhere,
+  }
+
+  // Get total count and data in parallel
+  const [total, transactions] = await Promise.all([
+    prisma.transaction.count({ where: combinedWhere }),
+    prisma.transaction.findMany({
+      where: combinedWhere,
+      orderBy: { date: 'desc' },
+      skip: (page - 1) * pageSize,
+      take: pageSize,
+      select: {
+        id: true,
+        date: true,
+        description: true,
+        rawDescription: true,
+        note: true,
+        withdrawal: true,
+        deposit: true,
+        balance: true,
+        accountNumber: true,
+        accountName: true,
+        accountType: true,
+        category: {
+          select: {
+            name: true,
+            color: true,
+          },
         },
       },
-    },
-  })
+    }),
+  ])
 
-  return transactions.map((t) => ({
-    id: t.id,
-    date: t.date.toISOString(),
-    description: t.description,
-    rawDescription: t.rawDescription,
-    note: t.note,
-    withdrawal: t.withdrawal ? Number(t.withdrawal) : null,
-    deposit: t.deposit ? Number(t.deposit) : null,
-    balance: Number(t.balance),
-    category: t.category?.name || null,
-    categoryColor: t.category?.color || null,
-    accountNumber: t.accountNumber,
-    accountName: t.accountName,
-    accountType: t.accountType,
-  }))
+  return {
+    data: transactions.map((t) => ({
+      id: t.id,
+      date: t.date.toISOString(),
+      description: t.description,
+      rawDescription: t.rawDescription,
+      note: t.note,
+      withdrawal: t.withdrawal ? Number(t.withdrawal) : null,
+      deposit: t.deposit ? Number(t.deposit) : null,
+      balance: Number(t.balance),
+      category: t.category?.name || null,
+      categoryColor: t.category?.color || null,
+      accountNumber: t.accountNumber,
+      accountName: t.accountName,
+      accountType: t.accountType,
+    })),
+    total,
+    page,
+    pageSize,
+    totalPages: Math.ceil(total / pageSize),
+  }
+}
+
+export async function getTransactionsPaginated(
+  page: number = 1,
+  pageSize: number = 20,
+  categoryFilter?: string,
+  filter?: DateRangeFilter,
+  transactionType?: TransactionTypeFilter
+): Promise<PaginatedTransactions> {
+  const cacheKey = `transactions-paginated-${page}-${pageSize}-${categoryFilter || 'all'}-${filter?.from || 'all'}-${filter?.to || 'all'}-${filter?.accountNumber || 'all'}-${transactionType || 'all'}`
+  const cachedFn = unstable_cache(
+    () => getTransactionsPaginatedInternal(page, pageSize, categoryFilter, filter, transactionType),
+    [cacheKey],
+    { revalidate: CACHE_REVALIDATE_SECONDS, tags: [DASHBOARD_CACHE_TAG] }
+  )
+  return cachedFn()
+}
+
+/**
+ * ดึงรายการ Transactions ล่าสุด (legacy - for backward compatibility)
+ */
+async function getRecentTransactionsInternal(
+  categoryFilter?: string,
+  limit: number = 100,
+  filter?: DateRangeFilter,
+  transactionType?: TransactionTypeFilter
+): Promise<TransactionData[]> {
+  const result = await getTransactionsPaginatedInternal(1, limit, categoryFilter, filter, transactionType)
+  return result.data
 }
 
 export async function getRecentTransactions(
   categoryFilter?: string,
   limit: number = 20,
-  filter?: DateRangeFilter
+  filter?: DateRangeFilter,
+  transactionType?: TransactionTypeFilter
 ): Promise<TransactionData[]> {
-  const cacheKey = `transactions-${categoryFilter || 'all'}-${limit}-${filter?.from || 'all'}-${filter?.to || 'all'}-${filter?.accountNumber || 'all'}`
+  const cacheKey = `transactions-${categoryFilter || 'all'}-${limit}-${filter?.from || 'all'}-${filter?.to || 'all'}-${filter?.accountNumber || 'all'}-${transactionType || 'all'}`
   const cachedFn = unstable_cache(
-    () => getRecentTransactionsInternal(categoryFilter, limit, filter),
+    () => getRecentTransactionsInternal(categoryFilter, limit, filter, transactionType),
     [cacheKey],
-    { revalidate: CACHE_REVALIDATE_SECONDS }
+    { revalidate: CACHE_REVALIDATE_SECONDS, tags: [DASHBOARD_CACHE_TAG] }
   )
   return cachedFn()
 }
@@ -409,7 +486,7 @@ const getCategoriesCached = unstable_cache(
     })
   },
   ['categories'],
-  { revalidate: CACHE_REVALIDATE_SECONDS * 5 } // categories change less frequently
+  { revalidate: CACHE_REVALIDATE_SECONDS * 5, tags: [DASHBOARD_CACHE_TAG] } // categories change less frequently
 )
 
 export async function getCategories(): Promise<{ id: string; name: string }[]> {

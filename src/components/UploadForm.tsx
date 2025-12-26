@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useCallback, useEffect } from 'react'
-import Link from 'next/link'
+import { useQueryClient } from '@tanstack/react-query'
 import { previewTransactions, type TransactionPreview, type PreviewResult } from '@/lib/actions/preview-transactions'
 import { saveReviewedTransactions, type SaveResult } from '@/lib/actions/save-reviewed-transactions'
 import { SearchableSelect } from '@/components/ui/searchable-select'
@@ -9,6 +9,7 @@ import { SearchableSelect } from '@/components/ui/searchable-select'
 type Step = 'upload' | 'review' | 'done'
 
 export default function UploadForm() {
+  const queryClient = useQueryClient()
   const [step, setStep] = useState<Step>('upload')
   const [isDragging, setIsDragging] = useState(false)
   const [file, setFile] = useState<File | null>(null)
@@ -110,6 +111,12 @@ export default function UploadForm() {
       setSaveResult(result)
 
       if (result.success) {
+        // Invalidate all dashboard-related queries to refresh data
+        await queryClient.invalidateQueries({ queryKey: ['summary'] })
+        await queryClient.invalidateQueries({ queryKey: ['balanceTrend'] })
+        await queryClient.invalidateQueries({ queryKey: ['expensesByCategory'] })
+        await queryClient.invalidateQueries({ queryKey: ['transactions'] })
+
         setStep('done')
         setFile(null)
         setPreviews([])
@@ -385,7 +392,14 @@ export default function UploadForm() {
                       <td className="px-4 py-3">
                         <div className="max-w-[300px]">
                           <p className="font-medium truncate">{preview.transaction.note || '-'}</p>
-                          <p className="text-xs text-gray-500 truncate">{preview.transaction.rawDescription}</p>
+                          {preview.transaction.description && (
+                            <p className="text-xs text-blue-500 truncate" title={`Tr Description: ${preview.transaction.description}`}>
+                              {preview.transaction.description}
+                            </p>
+                          )}
+                          <p className="text-xs text-gray-500 truncate" title={`Description: ${preview.transaction.rawDescription}`}>
+                            {preview.transaction.rawDescription}
+                          </p>
                         </div>
                       </td>
                       <td className={`px-4 py-3 text-right font-medium ${isWithdrawal ? 'text-red-600' : 'text-green-600'}`}>
@@ -429,7 +443,23 @@ export default function UploadForm() {
         {/* Save Error */}
         {saveResult && !saveResult.success && (
           <div className="mt-4 p-4 rounded-lg border bg-red-50 border-red-200">
-            <p className="text-red-800">{saveResult.message}</p>
+            <p className="text-red-800 font-medium">{saveResult.message}</p>
+            {saveResult.validationIssues && saveResult.validationIssues.length > 0 && (
+              <div className="mt-3">
+                <p className="text-sm text-red-700 font-medium mb-2">รายการที่มีปัญหา:</p>
+                <ul className="text-sm text-red-600 space-y-1">
+                  {saveResult.validationIssues.slice(0, 10).map((issue, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <span className="font-mono bg-red-100 px-1 rounded">#{issue.index + 1}</span>
+                      <span>{issue.issue}: {JSON.stringify(issue.value)}</span>
+                    </li>
+                  ))}
+                  {saveResult.validationIssues.length > 10 && (
+                    <li className="text-red-500">...และอีก {saveResult.validationIssues.length - 10} รายการ</li>
+                  )}
+                </ul>
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -449,20 +479,57 @@ export default function UploadForm() {
       <p className="text-gray-500 mb-6">{saveResult?.message}</p>
 
       {saveResult?.stats && (
-        <div className="grid grid-cols-3 gap-4 mb-6">
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border">
-            <p className="text-sm text-gray-500">เพิ่มใหม่</p>
-            <p className="text-2xl font-bold text-green-600">{saveResult.stats.insertedRows}</p>
+        <>
+          <div className="grid grid-cols-3 gap-4 mb-6">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border">
+              <p className="text-sm text-gray-500">เพิ่มใหม่</p>
+              <p className="text-2xl font-bold text-green-600">{saveResult.stats.insertedRows}</p>
+            </div>
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border">
+              <p className="text-sm text-gray-500">อัพเดท</p>
+              <p className="text-2xl font-bold text-blue-600">{saveResult.stats.updatedRows}</p>
+            </div>
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border">
+              <p className="text-sm text-gray-500">AI เรียนรู้</p>
+              <p className="text-2xl font-bold text-purple-600">{saveResult.stats.correctionsLearned}</p>
+            </div>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border">
-            <p className="text-sm text-gray-500">อัพเดท</p>
-            <p className="text-2xl font-bold text-blue-600">{saveResult.stats.updatedRows}</p>
-          </div>
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border">
-            <p className="text-sm text-gray-500">AI เรียนรู้</p>
-            <p className="text-2xl font-bold text-purple-600">{saveResult.stats.correctionsLearned}</p>
-          </div>
-        </div>
+
+          {/* Show skipped rows if any */}
+          {saveResult.stats.skippedRows && saveResult.stats.skippedRows > 0 && (
+            <div className="mb-6 p-4 rounded-lg border bg-yellow-50 border-yellow-200 text-left">
+              <p className="text-yellow-800 font-medium">
+                ข้ามไป {saveResult.stats.skippedRows} รายการ (มีข้อผิดพลาด)
+              </p>
+              {saveResult.stats.errors && saveResult.stats.errors.length > 0 && (
+                <ul className="mt-2 text-sm text-yellow-700 space-y-1">
+                  {saveResult.stats.errors.slice(0, 5).map((err, idx) => (
+                    <li key={idx} className="truncate">{err}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+
+          {/* Show validation warnings if any */}
+          {saveResult.validationIssues && saveResult.validationIssues.length > 0 && (
+            <div className="mb-6 p-4 rounded-lg border bg-orange-50 border-orange-200 text-left">
+              <p className="text-orange-800 font-medium">
+                คำเตือน: พบ {saveResult.validationIssues.length} รายการที่ไม่มียอดเงิน
+              </p>
+              <ul className="mt-2 text-sm text-orange-700 space-y-1">
+                {saveResult.validationIssues.slice(0, 5).map((issue, idx) => (
+                  <li key={idx}>
+                    รายการ #{issue.index + 1}: {issue.issue}
+                  </li>
+                ))}
+                {saveResult.validationIssues.length > 5 && (
+                  <li>...และอีก {saveResult.validationIssues.length - 5} รายการ</li>
+                )}
+              </ul>
+            </div>
+          )}
+        </>
       )}
 
       <div className="flex gap-4 justify-center">
@@ -472,12 +539,14 @@ export default function UploadForm() {
         >
           อัปโหลดไฟล์ใหม่
         </button>
-        <Link
-          href="/dashboard"
+        <button
+          onClick={() => {
+            window.location.href = '/dashboard'
+          }}
           className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
         >
           ไปที่ Dashboard
-        </Link>
+        </button>
       </div>
     </div>
   )

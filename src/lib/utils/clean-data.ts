@@ -96,6 +96,37 @@ export interface RawTransactionRow {
   'Description'?: string
   'Note'?: string
   'chart'?: string // คอลัมน์ที่ user เพิ่มเอง (optional)
+  // Allow for flexible column names
+  [key: string]: string | undefined
+}
+
+/**
+ * Get value from row with flexible column name matching
+ * Tries exact match first, then case-insensitive match
+ */
+function getFlexValue(row: RawTransactionRow, ...possibleNames: string[]): string | undefined {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const rowAny = row as Record<string, any>
+
+  // Try exact matches first
+  for (const name of possibleNames) {
+    if (rowAny[name] !== undefined) {
+      return rowAny[name]
+    }
+  }
+
+  // Try case-insensitive and trimmed matches
+  const keys = Object.keys(row)
+  for (const name of possibleNames) {
+    const normalizedName = name.toLowerCase().trim()
+    for (const key of keys) {
+      if (key.toLowerCase().trim() === normalizedName) {
+        return rowAny[key]
+      }
+    }
+  }
+
+  return undefined
 }
 
 /**
@@ -124,41 +155,69 @@ export interface CleanedTransaction {
  * @returns CleanedTransaction หรือ null ถ้าข้อมูลไม่ถูกต้อง
  */
 export function cleanTransactionRow(row: RawTransactionRow): CleanedTransaction | null {
+  // Debug: log available columns and values for transactions with inter-company keywords
+  const allValues = Object.values(row).join(' ')
+  if (allValues.includes('ไอริส') || allValues.includes('เติมบุญ') || allValues.toLowerCase().includes('iris') || allValues.toLowerCase().includes('termboon')) {
+    console.log('[Clean-Data Debug] Raw row columns:', Object.keys(row))
+    console.log('[Clean-Data Debug] Raw row values:', row)
+  }
+
+  // Use flexible column name matching
+  const dateStr = getFlexValue(row, 'Date', 'วันที่')
+  const timeStr = getFlexValue(row, 'Time', 'เวลา')
+  const balanceStr = getFlexValue(row, 'Outstanding Balance', 'Balance', 'ยอดคงเหลือ')
+  const withdrawalStr = getFlexValue(row, 'Withdrawal', 'ถอน', 'เงินออก')
+  const depositStr = getFlexValue(row, 'Deposit', 'ฝาก', 'เงินเข้า')
+
   // Parse วันที่ - ต้องมี
-  const date = parseDate(row['Date'], row['Time'])
+  const date = parseDate(dateStr, timeStr)
   if (!date) {
     return null
   }
 
   // Parse balance - ต้องมี
-  const balance = parseNumber(row['Outstanding Balance'])
+  const balance = parseNumber(balanceStr)
   if (balance === null) {
     return null
   }
 
   // Parse withdrawal และ deposit
-  const withdrawal = parseNumber(row['Withdrawal'])
-  const deposit = parseNumber(row['Deposit'])
+  const withdrawal = parseNumber(withdrawalStr)
+  const deposit = parseNumber(depositStr)
 
   // อย่างน้อยต้องมี withdrawal หรือ deposit
   if (withdrawal === null && deposit === null) {
     return null
   }
 
+  // Get description fields with flexible matching
+  const trDescription = getFlexValue(row, 'Tr Description', 'Transaction Description')?.trim() || ''
+  const rawDescription = getFlexValue(row, 'Description', 'รายละเอียด')?.trim() || ''
+  const note = getFlexValue(row, 'Note', 'หมายเหตุ', 'Memo')?.trim() || null
+
+  // Debug: Log what description fields were found for inter-company transactions
+  if (allValues.includes('ไอริส') || allValues.includes('เติมบุญ')) {
+    console.log('[Clean-Data Debug] Mapped fields:', {
+      trDescription,
+      rawDescription,
+      note,
+    })
+  }
+
   return {
-    accountNumber: row['Account Number']?.trim() || null,
-    accountName: row['Account Name']?.trim() || null,
-    accountType: row['Account Type']?.trim() || null,
+    accountNumber: getFlexValue(row, 'Account Number', 'เลขบัญชี')?.trim() || null,
+    accountName: getFlexValue(row, 'Account Name', 'ชื่อบัญชี')?.trim() || null,
+    accountType: getFlexValue(row, 'Account Type', 'ประเภทบัญชี')?.trim() || null,
     date,
-    description: row['Tr Description']?.trim() || '',
-    rawDescription: row['Description']?.trim() || '',
-    note: row['Note']?.trim() || null,
+    description: trDescription,
+    rawDescription,
+    note,
     withdrawal,
     deposit,
     balance,
-    channel: row['Channel']?.trim() || null,
-    transactionCode: row['Tr Code']?.trim() || null,
-    chequeNumber: row['Cheque No.']?.trim() || null,
-    chart: row['chart']?.trim() || null, // หมวดหมู่จาก user (ถ้ามี)
+    channel: getFlexValue(row, 'Channel', 'ช่องทาง')?.trim() || null,
+    transactionCode: getFlexValue(row, 'Tr Code', 'รหัสรายการ')?.trim() || null,
+    chequeNumber: getFlexValue(row, 'Cheque No.', 'เช็ค')?.trim() || null,
+    chart: getFlexValue(row, 'chart', 'หมวดหมู่', 'Category')?.trim() || null,
   }
 }

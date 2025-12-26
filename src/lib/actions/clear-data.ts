@@ -2,6 +2,7 @@
 
 import { prisma } from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
+import { invalidateDashboardCache } from './dashboard'
 
 /**
  * ล้างข้อมูล transactions ทั้งหมด
@@ -15,6 +16,7 @@ export async function clearAllTransactions(): Promise<{
     const result = await prisma.transaction.deleteMany({})
 
     revalidatePath('/dashboard')
+    invalidateDashboardCache()
 
     return {
       success: true,
@@ -52,6 +54,7 @@ export async function clearAllData(): Promise<{
 
     revalidatePath('/dashboard')
     revalidatePath('/dashboard/rules')
+    invalidateDashboardCache()
 
     return {
       success: true,

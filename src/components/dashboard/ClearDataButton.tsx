@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useQueryClient } from '@tanstack/react-query'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -16,10 +16,20 @@ import { Trash2, AlertTriangle } from 'lucide-react'
 import { clearAllTransactions, clearAllData } from '@/lib/actions/clear-data'
 
 export default function ClearDataButton() {
-  const router = useRouter()
+  const queryClient = useQueryClient()
   const [isOpen, setIsOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [result, setResult] = useState<string | null>(null)
+
+  const invalidateAndRefresh = async () => {
+    // Invalidate React Query cache
+    await queryClient.invalidateQueries({ queryKey: ['summary'] })
+    await queryClient.invalidateQueries({ queryKey: ['balanceTrend'] })
+    await queryClient.invalidateQueries({ queryKey: ['expensesByCategory'] })
+    await queryClient.invalidateQueries({ queryKey: ['transactions'] })
+    // Hard refresh to update server components
+    window.location.reload()
+  }
 
   const handleClearTransactions = async () => {
     setIsLoading(true)
@@ -29,7 +39,7 @@ export default function ClearDataButton() {
       setTimeout(() => {
         setIsOpen(false)
         setResult(null)
-        router.refresh()
+        invalidateAndRefresh()
       }, 1500)
     } else {
       setResult(`Error: ${res.error}`)
@@ -45,7 +55,7 @@ export default function ClearDataButton() {
       setTimeout(() => {
         setIsOpen(false)
         setResult(null)
-        router.refresh()
+        invalidateAndRefresh()
       }, 1500)
     } else {
       setResult(`Error: ${res.error}`)

@@ -18,8 +18,10 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Badge } from '@/components/ui/badge'
-import { useTransactions } from '@/hooks/useDashboardData'
-import { type TransactionData } from '@/lib/actions/dashboard'
+import { Button } from '@/components/ui/button'
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react'
+import { usePaginatedTransactions } from '@/hooks/useDashboardData'
+import { type PaginatedTransactions } from '@/lib/actions/dashboard'
 
 interface DateRange {
   from?: Date
@@ -27,7 +29,7 @@ interface DateRange {
 }
 
 interface RecentTransactionsProps {
-  initialData: TransactionData[]
+  initialData: PaginatedTransactions
   categories: { id: string; name: string }[]
   dateRange?: DateRange
   accountNumber?: string
@@ -74,26 +76,31 @@ export default function RecentTransactions({
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [transactionType, setTransactionType] = useState<TransactionType>('all')
 
-  // Use React Query hook - shares cache with parent's transactions query
-  const { transactions: allTransactions, isLoading } = useTransactions({
+  // Use React Query hook with pagination
+  const {
+    transactions,
+    total,
+    page,
+    totalPages,
+    isLoading,
+    goToPage,
+    nextPage,
+    prevPage,
+    hasNextPage,
+    hasPrevPage,
+  } = usePaginatedTransactions({
     initialData,
     categoryFilter: selectedCategory,
+    transactionType,
     dateRange,
     accountNumber,
+    pageSize: 20,
     debounceMs: 300,
-  })
-
-  // Filter by transaction type
-  const transactions = allTransactions.filter((tx) => {
-    if (transactionType === 'all') return true
-    if (transactionType === 'withdrawal') return tx.withdrawal && tx.withdrawal > 0
-    if (transactionType === 'deposit') return tx.deposit && tx.deposit > 0
-    return true
   })
 
   // Get categories that have transactions (from initialData to show all possible categories)
   const categoriesWithTransactions = categories.filter((cat) =>
-    initialData.some((tx) => tx.category === cat.name)
+    initialData.data.some((tx) => tx.category === cat.name)
   )
 
   return (
@@ -205,6 +212,82 @@ export default function RecentTransactions({
             </TableBody>
           </Table>
         </div>
+
+        {/* Total count and Pagination */}
+        {total > 0 && (
+          <div className="flex items-center justify-between mt-4 pt-4 border-t">
+            <div className="text-sm text-muted-foreground">
+              {totalPages > 1
+                ? `แสดง ${((page - 1) * 20) + 1} - ${Math.min(page * 20, total)} จาก ${total} รายการ`
+                : `ทั้งหมด ${total} รายการ`}
+            </div>
+            {totalPages > 1 && (
+              <div className="flex items-center gap-1">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => goToPage(1)}
+                  disabled={!hasPrevPage || isLoading}
+                >
+                  <ChevronsLeft className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={prevPage}
+                  disabled={!hasPrevPage || isLoading}
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+
+                {/* Page numbers */}
+                <div className="flex items-center gap-1 mx-2">
+                  {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                    let pageNum: number
+                    if (totalPages <= 5) {
+                      pageNum = i + 1
+                    } else if (page <= 3) {
+                      pageNum = i + 1
+                    } else if (page >= totalPages - 2) {
+                      pageNum = totalPages - 4 + i
+                    } else {
+                      pageNum = page - 2 + i
+                    }
+                    return (
+                      <Button
+                        key={pageNum}
+                        variant={page === pageNum ? 'default' : 'outline'}
+                        size="sm"
+                        className="w-8 h-8 p-0"
+                        onClick={() => goToPage(pageNum)}
+                        disabled={isLoading}
+                      >
+                        {pageNum}
+                      </Button>
+                    )
+                  })}
+                </div>
+
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={nextPage}
+                  disabled={!hasNextPage || isLoading}
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => goToPage(totalPages)}
+                  disabled={!hasNextPage || isLoading}
+                >
+                  <ChevronsRight className="h-4 w-4" />
+                </Button>
+              </div>
+            )}
+          </div>
+        )}
       </CardContent>
     </Card>
   )

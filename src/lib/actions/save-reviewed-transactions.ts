@@ -4,7 +4,15 @@ import { revalidatePath } from 'next/cache'
 import { prisma } from '@/lib/prisma'
 import { Prisma } from '@/generated/prisma'
 import { DEFAULT_CATEGORIES } from '@/lib/utils/categorize'
+import { invalidateDashboardCache } from './dashboard'
 import type { TransactionPreview } from './preview-transactions'
+
+export interface ValidationIssue {
+  index: number
+  field: string
+  issue: string
+  value: unknown
+}
 
 export interface SaveResult {
   success: boolean
@@ -13,7 +21,10 @@ export interface SaveResult {
     insertedRows: number
     updatedRows: number
     correctionsLearned: number
+    skippedRows?: number
+    errors?: string[]
   }
+  validationIssues?: ValidationIssue[]
 }
 
 /**
@@ -45,6 +56,72 @@ async function ensureDefaultCategories(): Promise<Map<string, string>> {
 }
 
 /**
+ * Validate transaction data before saving
+ */
+function validateTransaction(
+  transaction: TransactionPreview['transaction'],
+  index: number
+): ValidationIssue[] {
+  const issues: ValidationIssue[] = []
+
+  // Check date
+  const txDate = transaction.date instanceof Date ? transaction.date : new Date(transaction.date)
+  if (isNaN(txDate.getTime())) {
+    issues.push({
+      index,
+      field: 'date',
+      issue: 'วันที่ไม่ถูกต้อง',
+      value: transaction.date,
+    })
+  }
+
+  // Check balance (required)
+  const balance = Number(transaction.balance)
+  if (transaction.balance === null || transaction.balance === undefined || isNaN(balance)) {
+    issues.push({
+      index,
+      field: 'balance',
+      issue: 'ยอดคงเหลือไม่ถูกต้อง',
+      value: transaction.balance,
+    })
+  }
+
+  // Check that at least one of withdrawal/deposit exists
+  const withdrawal = transaction.withdrawal ? Number(transaction.withdrawal) : null
+  const deposit = transaction.deposit ? Number(transaction.deposit) : null
+
+  if ((!withdrawal || withdrawal <= 0) && (!deposit || deposit <= 0)) {
+    issues.push({
+      index,
+      field: 'amount',
+      issue: 'ไม่มียอดเงินถอนหรือฝาก',
+      value: { withdrawal: transaction.withdrawal, deposit: transaction.deposit },
+    })
+  }
+
+  // Check for NaN in amounts
+  if (transaction.withdrawal && isNaN(Number(transaction.withdrawal))) {
+    issues.push({
+      index,
+      field: 'withdrawal',
+      issue: 'ยอดเงินถอนไม่ถูกต้อง',
+      value: transaction.withdrawal,
+    })
+  }
+
+  if (transaction.deposit && isNaN(Number(transaction.deposit))) {
+    issues.push({
+      index,
+      field: 'deposit',
+      issue: 'ยอดเงินฝากไม่ถูกต้อง',
+      value: transaction.deposit,
+    })
+  }
+
+  return issues
+}
+
+/**
  * บันทึก transactions หลังจาก user review
  * และเรียนรู้จากการแก้ไขของ user
  */
@@ -52,12 +129,36 @@ export async function saveReviewedTransactions(
   previews: TransactionPreview[]
 ): Promise<SaveResult> {
   try {
+    // Validate all transactions first
+    const allValidationIssues: ValidationIssue[] = []
+    const criticalIssues: ValidationIssue[] = []
+
+    previews.forEach((preview, index) => {
+      const issues = validateTransaction(preview.transaction, index)
+      allValidationIssues.push(...issues)
+
+      // Critical issues that prevent saving
+      const critical = issues.filter(i => ['date', 'balance'].includes(i.field))
+      criticalIssues.push(...critical)
+    })
+
+    // If there are critical issues, return early with validation errors
+    if (criticalIssues.length > 0) {
+      return {
+        success: false,
+        message: `พบข้อมูลไม่ถูกต้อง ${criticalIssues.length} รายการ`,
+        validationIssues: criticalIssues,
+      }
+    }
+
     // สร้าง category map
     const categoryMap = await ensureDefaultCategories()
 
     let insertedCount = 0
     let updatedCount = 0
     let correctionsCount = 0
+    let skippedCount = 0
+    const errors: string[] = []
 
     for (const preview of previews) {
       const { transaction, aiCategory, selectedCategory } = preview
@@ -78,15 +179,22 @@ export async function saveReviewedTransactions(
       // หา category ID
       const categoryId = categoryMap.get(selectedCategory) || categoryMap.get('ไม่ระบุ')
 
+      // Convert date string back to Date if needed (serialization issue)
+      const txDate = transaction.date instanceof Date ? transaction.date : new Date(transaction.date)
+
+      // Convert withdrawal/deposit to numbers (handle serialization)
+      const withdrawalNum = transaction.withdrawal ? Number(transaction.withdrawal) : null
+      const depositNum = transaction.deposit ? Number(transaction.deposit) : null
+
       // เตรียมข้อมูลสำหรับ upsert
       const data: Prisma.TransactionCreateInput = {
-        date: transaction.date,
+        date: txDate,
         description: transaction.description,
         rawDescription: transaction.rawDescription,
         note: transaction.note,
-        withdrawal: transaction.withdrawal ? new Prisma.Decimal(transaction.withdrawal) : null,
-        deposit: transaction.deposit ? new Prisma.Decimal(transaction.deposit) : null,
-        balance: new Prisma.Decimal(transaction.balance),
+        withdrawal: withdrawalNum ? new Prisma.Decimal(withdrawalNum) : null,
+        deposit: depositNum ? new Prisma.Decimal(depositNum) : null,
+        balance: new Prisma.Decimal(Number(transaction.balance)),
         accountNumber: transaction.accountNumber,
         accountName: transaction.accountName,
         accountType: transaction.accountType,
@@ -99,54 +207,26 @@ export async function saveReviewedTransactions(
       try {
         let result
 
-        // For null withdrawal (deposit transactions), use findFirst + create/update
-        // because Prisma upsert doesn't support null in composite unique where clause
-        if (!transaction.withdrawal) {
-          const existing = await prisma.transaction.findFirst({
-            where: {
-              date: transaction.date,
-              accountNumber: transaction.accountNumber || '',
-              balance: new Prisma.Decimal(transaction.balance),
-              withdrawal: null,
-            },
-          })
+        // Use findFirst + create/update pattern for ALL transactions
+        // because Prisma doesn't support nullable fields in composite unique upsert
+        const existing = await prisma.transaction.findFirst({
+          where: {
+            date: txDate,
+            accountNumber: transaction.accountNumber || '',
+            balance: new Prisma.Decimal(Number(transaction.balance)),
+            withdrawal: withdrawalNum ? new Prisma.Decimal(withdrawalNum) : null,
+          },
+        })
 
-          if (existing) {
-            result = await prisma.transaction.update({
-              where: { id: existing.id },
-              data: {
-                description: transaction.description,
-                rawDescription: transaction.rawDescription,
-                note: transaction.note,
-                deposit: transaction.deposit ? new Prisma.Decimal(transaction.deposit) : null,
-                accountName: transaction.accountName,
-                accountType: transaction.accountType,
-                channel: transaction.channel,
-                transactionCode: transaction.transactionCode,
-                chequeNumber: transaction.chequeNumber,
-                categoryId: categoryId,
-              },
-            })
-          } else {
-            result = await prisma.transaction.create({ data })
-          }
-        } else {
-          // For withdrawal transactions, use normal upsert
-          result = await prisma.transaction.upsert({
-            where: {
-              unique_transaction: {
-                date: transaction.date,
-                accountNumber: transaction.accountNumber || '',
-                balance: new Prisma.Decimal(transaction.balance),
-                withdrawal: new Prisma.Decimal(transaction.withdrawal),
-              },
-            },
-            update: {
+        if (existing) {
+          result = await prisma.transaction.update({
+            where: { id: existing.id },
+            data: {
               description: transaction.description,
               rawDescription: transaction.rawDescription,
               note: transaction.note,
-              withdrawal: new Prisma.Decimal(transaction.withdrawal),
-              deposit: transaction.deposit ? new Prisma.Decimal(transaction.deposit) : null,
+              withdrawal: withdrawalNum ? new Prisma.Decimal(withdrawalNum) : null,
+              deposit: depositNum ? new Prisma.Decimal(depositNum) : null,
               accountName: transaction.accountName,
               accountType: transaction.accountType,
               channel: transaction.channel,
@@ -154,8 +234,9 @@ export async function saveReviewedTransactions(
               chequeNumber: transaction.chequeNumber,
               categoryId: categoryId,
             },
-            create: data,
           })
+        } else {
+          result = await prisma.transaction.create({ data })
         }
 
         if (result.createdAt.getTime() === result.updatedAt.getTime()) {
@@ -164,16 +245,20 @@ export async function saveReviewedTransactions(
           updatedCount++
         }
       } catch (error) {
-        // Skip unique constraint violations
-        if (error instanceof Error && !error.message.includes('Unique constraint')) {
-          console.error('Save error:', error)
-        }
+        skippedCount++
+        const errMsg = `withdrawal=${withdrawalNum}, deposit=${depositNum}: ${error instanceof Error ? error.message : error}`
+        errors.push(errMsg)
+        console.error('[Save Error]', errMsg)
       }
     }
 
     // Revalidate dashboard to show updated data
     revalidatePath('/dashboard')
     revalidatePath('/')
+    invalidateDashboardCache()
+
+    // Non-critical warnings (amount issues)
+    const warnings = allValidationIssues.filter(i => i.field === 'amount')
 
     return {
       success: true,
@@ -182,7 +267,10 @@ export async function saveReviewedTransactions(
         insertedRows: insertedCount,
         updatedRows: updatedCount,
         correctionsLearned: correctionsCount,
+        skippedRows: skippedCount,
+        errors: errors.slice(0, 10), // Return first 10 errors
       },
+      validationIssues: warnings.length > 0 ? warnings : undefined,
     }
   } catch (error) {
     console.error('Save error:', error)

@@ -2,7 +2,7 @@ import {
   getSummaryData,
   getBalanceTrend,
   getExpensesByCategory,
-  getRecentTransactions,
+  getTransactionsPaginated,
   getCategories,
   getAllAccounts,
 } from '@/lib/actions/dashboard'
@@ -14,12 +14,12 @@ import Link from 'next/link'
 export const dynamic = 'force-dynamic'
 
 export default async function DashboardPage() {
-  const [summary, balanceTrend, expensesByCategory, recentTransactions, categories, accounts] =
+  const [summary, balanceTrend, expensesByCategory, paginatedTransactions, categories, accounts] =
     await Promise.all([
       getSummaryData(),
       getBalanceTrend(),
       getExpensesByCategory(),
-      getRecentTransactions(),
+      getTransactionsPaginated(1, 20),
       getCategories(),
       getAllAccounts(),
     ])
@@ -58,7 +58,7 @@ export default async function DashboardPage() {
           initialSummary={summary}
           initialBalanceTrend={balanceTrend}
           initialExpensesByCategory={expensesByCategory}
-          initialTransactions={recentTransactions}
+          initialTransactions={paginatedTransactions}
           categories={categories}
           accounts={accounts}
         />

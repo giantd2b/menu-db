@@ -7,11 +7,14 @@ import {
   getBalanceTrend,
   getExpensesByCategory,
   getRecentTransactions,
+  getTransactionsPaginated,
   type SummaryData,
   type BalanceTrendData,
   type CategoryData,
   type TransactionData,
+  type PaginatedTransactions,
   type DateRangeFilter,
+  type TransactionTypeFilter,
 } from '@/lib/actions/dashboard'
 
 interface DateRange {
@@ -104,8 +107,8 @@ export function useDashboardData({
 
   // Recent transactions query
   const transactionsQuery = useQuery({
-    queryKey: ['transactions', undefined, 20, filter?.from, filter?.to, filter?.accountNumber],
-    queryFn: () => getRecentTransactions(undefined, 20, filter),
+    queryKey: ['transactions', undefined, 100, filter?.from, filter?.to, filter?.accountNumber],
+    queryFn: () => getRecentTransactions(undefined, 100, filter),
     initialData: hasFilter ? undefined : initialTransactions,
     enabled: hasFilter,
     staleTime: 60 * 1000,
@@ -132,6 +135,7 @@ export function useDashboardData({
 interface UseTransactionsOptions {
   initialData: TransactionData[]
   categoryFilter?: string
+  transactionType?: TransactionTypeFilter
   dateRange?: DateRange
   accountNumber?: string
   debounceMs?: number
@@ -140,23 +144,96 @@ interface UseTransactionsOptions {
 export function useTransactions({
   initialData,
   categoryFilter,
+  transactionType,
   dateRange,
   accountNumber,
   debounceMs = 300,
 }: UseTransactionsOptions) {
   const debouncedCategory = useDebounce(categoryFilter, debounceMs)
+  const debouncedType = useDebounce(transactionType, debounceMs)
   const debouncedAccount = useDebounce(accountNumber, debounceMs)
   const filter = dateRange ? toFilter(dateRange, debouncedAccount) : (debouncedAccount ? { accountNumber: debouncedAccount } : undefined)
 
+  // Check if we're using default view (no filters)
+  const isDefaultView = (!debouncedCategory || debouncedCategory === 'all')
+    && !filter
+    && (!debouncedType || debouncedType === 'all')
+
   const query = useQuery({
-    queryKey: ['transactions', debouncedCategory, 20, filter?.from, filter?.to, filter?.accountNumber],
-    queryFn: () => getRecentTransactions(debouncedCategory, 20, filter),
-    initialData: (!debouncedCategory || debouncedCategory === 'all') && !filter ? initialData : undefined,
+    queryKey: ['transactions', debouncedCategory, 100, filter?.from, filter?.to, filter?.accountNumber, debouncedType],
+    queryFn: () => getRecentTransactions(debouncedCategory, 100, filter, debouncedType),
+    initialData: isDefaultView ? initialData : undefined,
     staleTime: 60 * 1000,
+    enabled: true,
   })
 
+  // Only fallback to initialData if we're in default view
+  // Otherwise show query data (or empty array while loading)
   return {
-    transactions: query.data ?? initialData,
+    transactions: isDefaultView ? (query.data ?? initialData) : (query.data ?? []),
     isLoading: query.isFetching,
+  }
+}
+
+interface UsePaginatedTransactionsOptions {
+  initialData: PaginatedTransactions
+  categoryFilter?: string
+  transactionType?: TransactionTypeFilter
+  dateRange?: DateRange
+  accountNumber?: string
+  pageSize?: number
+  debounceMs?: number
+}
+
+export function usePaginatedTransactions({
+  initialData,
+  categoryFilter,
+  transactionType,
+  dateRange,
+  accountNumber,
+  pageSize = 20,
+  debounceMs = 300,
+}: UsePaginatedTransactionsOptions) {
+  const [page, setPage] = useState(1)
+  const debouncedCategory = useDebounce(categoryFilter, debounceMs)
+  const debouncedType = useDebounce(transactionType, debounceMs)
+  const debouncedAccount = useDebounce(accountNumber, debounceMs)
+  const filter = dateRange ? toFilter(dateRange, debouncedAccount) : (debouncedAccount ? { accountNumber: debouncedAccount } : undefined)
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setPage(1)
+  }, [debouncedCategory, debouncedType, filter?.from, filter?.to, filter?.accountNumber])
+
+  // Check if we're using default view (no filters)
+  const isDefaultView = (!debouncedCategory || debouncedCategory === 'all')
+    && !filter
+    && (!debouncedType || debouncedType === 'all')
+    && page === 1
+
+  const query = useQuery({
+    queryKey: ['transactions-paginated', page, pageSize, debouncedCategory, filter?.from, filter?.to, filter?.accountNumber, debouncedType],
+    queryFn: () => getTransactionsPaginated(page, pageSize, debouncedCategory, filter, debouncedType),
+    initialData: isDefaultView ? initialData : undefined,
+    staleTime: 60 * 1000,
+    enabled: true,
+  })
+
+  const result = query.data ?? initialData
+
+  return {
+    transactions: result.data,
+    total: result.total,
+    page: result.page,
+    pageSize: result.pageSize,
+    totalPages: result.totalPages,
+    isLoading: query.isFetching,
+    setPage,
+    // Helper functions
+    goToPage: (p: number) => setPage(Math.max(1, Math.min(p, result.totalPages))),
+    nextPage: () => setPage((prev) => Math.min(prev + 1, result.totalPages)),
+    prevPage: () => setPage((prev) => Math.max(prev - 1, 1)),
+    hasNextPage: result.page < result.totalPages,
+    hasPrevPage: result.page > 1,
   }
 }

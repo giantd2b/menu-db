@@ -19,7 +19,7 @@ import {
   type SummaryData,
   type BalanceTrendData,
   type CategoryData,
-  type TransactionData,
+  type PaginatedTransactions,
   type AccountInfo,
 } from '@/lib/actions/dashboard'
 
@@ -27,7 +27,7 @@ interface DashboardClientProps {
   initialSummary: SummaryData
   initialBalanceTrend: BalanceTrendData[]
   initialExpensesByCategory: CategoryData[]
-  initialTransactions: TransactionData[]
+  initialTransactions: PaginatedTransactions
   categories: { id: string; name: string }[]
   accounts: AccountInfo[]
 }
@@ -46,18 +46,17 @@ export default function DashboardClient({
   })
   const [selectedAccount, setSelectedAccount] = useState<string>('all')
 
-  // Use React Query hook with debouncing
+  // Use React Query hook with debouncing (for summary, charts only)
   const {
     summary,
     balanceTrend,
     expensesByCategory,
-    transactions,
     isLoading,
   } = useDashboardData({
     initialSummary,
     initialBalanceTrend,
     initialExpensesByCategory,
-    initialTransactions,
+    initialTransactions: initialTransactions.data,
     dateRange,
     accountNumber: selectedAccount === 'all' ? undefined : selectedAccount,
     debounceMs: 300,
@@ -124,7 +123,7 @@ export default function DashboardClient({
       {/* Recent Transactions - pass dateRange and account to sync filtering */}
       <div className="mt-6">
         <RecentTransactions
-          initialData={transactions}
+          initialData={initialTransactions}
           categories={categories}
           dateRange={dateRange}
           accountNumber={selectedAccount === 'all' ? undefined : selectedAccount}
