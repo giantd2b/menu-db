@@ -373,11 +373,8 @@ describe('Inter-Company Transfer Categorization', () => {
     expect(categorizeTransaction(tx)).not.toBe('เงินโอนระหว่างบัญชีบริษัท')
   })
 
-  it('should detect ไอริส เติมบุญ in accountName field', () => {
-    const tx = {
-      ...createMockTransaction(''),
-      accountName: 'บริษัท ไอริส เติมบุญ จำกัด',
-    }
+  it('should detect ไอริส เติมบุญ in description (transfer destination)', () => {
+    const tx = createMockTransaction('', 'Transfer to SCB x3501 บริษัท ไอริส เติมบุญ')
     expect(categorizeTransaction(tx)).toBe('เงินโอนระหว่างบัญชีบริษัท')
   })
 })

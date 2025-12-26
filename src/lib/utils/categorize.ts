@@ -279,8 +279,7 @@ export function categorizeTransaction(transaction: CleanedTransaction): string {
   const note = transaction.note || ''
   const description = transaction.description || ''
   const rawDescription = transaction.rawDescription || ''
-  const accountName = transaction.accountName || ''
-  const allText = `${description} ${rawDescription} ${note} ${accountName}`
+  const allText = `${description} ${rawDescription} ${note}`
 
   // เรียง rules ตาม priority
   const sortedRules = [...CATEGORY_RULES].sort((a, b) => a.priority - b.priority)
