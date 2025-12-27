@@ -245,27 +245,112 @@ export async function getSummaryData(filter?: DateRangeFilter): Promise<SummaryD
 async function getBalanceTrendInternal(filter?: DateRangeFilter): Promise<BalanceTrendData[]> {
   const where = getFilterWhereClause(filter)
 
-  const transactions = await prisma.transaction.findMany({
-    where,
-    orderBy: { date: 'asc' },
-    select: {
-      date: true,
-      balance: true,
-    },
-  })
+  // Check if specific account is selected
+  const isAllAccounts = !filter?.accountNumber
 
-  // Group by date และเอา balance สุดท้ายของวัน
-  const dateBalanceMap = new Map<string, number>()
+  if (isAllAccounts) {
+    // Get all unique accounts
+    const accounts = await prisma.transaction.findMany({
+      distinct: ['accountNumber'],
+      where: { accountNumber: { not: null } },
+      select: { accountNumber: true },
+    })
 
-  transactions.forEach((t) => {
-    const dateStr = t.date.toISOString().split('T')[0]
-    dateBalanceMap.set(dateStr, Number(t.balance))
-  })
+    // Get all transactions with account info
+    const transactions = await prisma.transaction.findMany({
+      where,
+      orderBy: [{ date: 'asc' }, { accountNumber: 'asc' }],
+      select: {
+        date: true,
+        balance: true,
+        accountNumber: true,
+      },
+    })
 
-  return Array.from(dateBalanceMap.entries()).map(([date, balance]) => ({
-    date,
-    balance,
-  }))
+    // Track last known balance for each account
+    const accountLastBalance = new Map<string, number>()
+
+    // Initialize with 0 for all accounts
+    accounts.forEach((acc) => {
+      if (acc.accountNumber) {
+        accountLastBalance.set(acc.accountNumber, 0)
+      }
+    })
+
+    // Group by date, tracking each account's last balance
+    const dateBalanceMap = new Map<string, Map<string, number>>()
+
+    transactions.forEach((t) => {
+      const dateStr = t.date.toISOString().split('T')[0]
+      const accNum = t.accountNumber || 'unknown'
+
+      // Update last known balance for this account
+      accountLastBalance.set(accNum, Number(t.balance))
+
+      // Store snapshot of all account balances for this date
+      if (!dateBalanceMap.has(dateStr)) {
+        dateBalanceMap.set(dateStr, new Map(accountLastBalance))
+      } else {
+        dateBalanceMap.get(dateStr)!.set(accNum, Number(t.balance))
+      }
+    })
+
+    // Calculate total balance for each date
+    const result: BalanceTrendData[] = []
+    let runningBalances = new Map<string, number>()
+
+    // Initialize running balances
+    accounts.forEach((acc) => {
+      if (acc.accountNumber) {
+        runningBalances.set(acc.accountNumber, 0)
+      }
+    })
+
+    // Sort dates and calculate cumulative totals
+    const sortedDates = Array.from(dateBalanceMap.keys()).sort()
+
+    for (const date of sortedDates) {
+      const dateBalances = dateBalanceMap.get(date)!
+
+      // Update running balances with today's values
+      dateBalances.forEach((balance, accNum) => {
+        runningBalances.set(accNum, balance)
+      })
+
+      // Sum all account balances
+      let totalBalance = 0
+      runningBalances.forEach((balance) => {
+        totalBalance += balance
+      })
+
+      result.push({ date, balance: totalBalance })
+    }
+
+    return result
+  } else {
+    // Single account - original logic
+    const transactions = await prisma.transaction.findMany({
+      where,
+      orderBy: { date: 'asc' },
+      select: {
+        date: true,
+        balance: true,
+      },
+    })
+
+    // Group by date และเอา balance สุดท้ายของวัน
+    const dateBalanceMap = new Map<string, number>()
+
+    transactions.forEach((t) => {
+      const dateStr = t.date.toISOString().split('T')[0]
+      dateBalanceMap.set(dateStr, Number(t.balance))
+    })
+
+    return Array.from(dateBalanceMap.entries()).map(([date, balance]) => ({
+      date,
+      balance,
+    }))
+  }
 }
 
 export async function getBalanceTrend(filter?: DateRangeFilter): Promise<BalanceTrendData[]> {
@@ -494,6 +579,73 @@ export async function getCategories(): Promise<{ id: string; name: string }[]> {
 }
 
 /**
+ * ข้อมูลยอดคงเหลือแต่ละบัญชี
+ */
+export interface AccountBalance {
+  accountNumber: string
+  accountName: string | null
+  accountType: string | null
+  balance: number
+  lastUpdated: string
+}
+
+/**
+ * ดึงยอดคงเหลือล่าสุดของทุกบัญชี
+ */
+async function getAllAccountBalancesInternal(): Promise<AccountBalance[]> {
+  // Get unique accounts
+  const accounts = await prisma.transaction.findMany({
+    distinct: ['accountNumber'],
+    where: {
+      accountNumber: { not: null },
+    },
+    select: {
+      accountNumber: true,
+    },
+  })
+
+  // Get latest balance for each account
+  const balances: AccountBalance[] = []
+
+  for (const acc of accounts) {
+    if (!acc.accountNumber) continue
+
+    const latest = await prisma.transaction.findFirst({
+      where: { accountNumber: acc.accountNumber },
+      orderBy: { date: 'desc' },
+      select: {
+        balance: true,
+        accountName: true,
+        accountType: true,
+        date: true,
+      },
+    })
+
+    if (latest) {
+      balances.push({
+        accountNumber: acc.accountNumber,
+        accountName: latest.accountName,
+        accountType: latest.accountType,
+        balance: Number(latest.balance),
+        lastUpdated: latest.date.toISOString(),
+      })
+    }
+  }
+
+  return balances.sort((a, b) => b.balance - a.balance)
+}
+
+const getAllAccountBalancesCached = unstable_cache(
+  getAllAccountBalancesInternal,
+  ['all-account-balances'],
+  { revalidate: CACHE_REVALIDATE_SECONDS, tags: [DASHBOARD_CACHE_TAG] }
+)
+
+export async function getAllAccountBalances(): Promise<AccountBalance[]> {
+  return getAllAccountBalancesCached()
+}
+
+/**
  * ดึงช่วงวันที่ของข้อมูล
  */
 export async function getDateRange(): Promise<{ minDate: string | null; maxDate: string | null }> {
@@ -511,5 +663,38 @@ export async function getDateRange(): Promise<{ minDate: string | null; maxDate:
   return {
     minDate: oldest?.date.toISOString() || null,
     maxDate: newest?.date.toISOString() || null,
+  }
+}
+
+/**
+ * Bulk update transaction categories
+ */
+export async function bulkUpdateTransactionCategory(
+  transactionIds: string[],
+  categoryId: string | null
+): Promise<{ success: boolean; updatedCount: number }> {
+  try {
+    const result = await prisma.transaction.updateMany({
+      where: {
+        id: { in: transactionIds },
+      },
+      data: {
+        categoryId: categoryId,
+      },
+    })
+
+    // Invalidate cache after update
+    await invalidateDashboardCache()
+
+    return {
+      success: true,
+      updatedCount: result.count,
+    }
+  } catch (error) {
+    console.error('Bulk update failed:', error)
+    return {
+      success: false,
+      updatedCount: 0,
+    }
   }
 }

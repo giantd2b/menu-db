@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Table,
@@ -19,9 +19,12 @@ import {
 } from '@/components/ui/select'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react'
+import { Checkbox } from '@/components/ui/checkbox'
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, X, Split } from 'lucide-react'
 import { usePaginatedTransactions } from '@/hooks/useDashboardData'
-import { type PaginatedTransactions } from '@/lib/actions/dashboard'
+import { type PaginatedTransactions, bulkUpdateTransactionCategory } from '@/lib/actions/dashboard'
+import { useQueryClient } from '@tanstack/react-query'
+import SplitTransactionDialog from './SplitTransactionDialog'
 
 interface DateRange {
   from?: Date
@@ -75,6 +78,11 @@ export default function RecentTransactions({
 }: RecentTransactionsProps) {
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [transactionType, setTransactionType] = useState<TransactionType>('all')
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
+  const [bulkCategory, setBulkCategory] = useState<string>('')
+  const [splitTransactionId, setSplitTransactionId] = useState<string | null>(null)
+  const [isPending, startTransition] = useTransition()
+  const queryClient = useQueryClient()
 
   // Use React Query hook with pagination
   const {
@@ -98,10 +106,58 @@ export default function RecentTransactions({
     debounceMs: 300,
   })
 
+  // Selection handlers
+  const toggleSelect = (id: string) => {
+    setSelectedIds((prev) => {
+      const newSet = new Set(prev)
+      if (newSet.has(id)) {
+        newSet.delete(id)
+      } else {
+        newSet.add(id)
+      }
+      return newSet
+    })
+  }
+
+  const toggleSelectAll = () => {
+    if (selectedIds.size === transactions.length) {
+      setSelectedIds(new Set())
+    } else {
+      setSelectedIds(new Set(transactions.map((tx) => tx.id)))
+    }
+  }
+
+  const clearSelection = () => {
+    setSelectedIds(new Set())
+    setBulkCategory('')
+  }
+
+  const handleBulkUpdate = () => {
+    if (selectedIds.size === 0) return
+
+    const categoryId = bulkCategory === 'none' ? null : bulkCategory
+
+    startTransition(async () => {
+      const result = await bulkUpdateTransactionCategory(
+        Array.from(selectedIds),
+        categoryId
+      )
+
+      if (result.success) {
+        clearSelection()
+        // Invalidate queries to refresh data
+        queryClient.invalidateQueries({ queryKey: ['transactions'] })
+      }
+    })
+  }
+
   // Get categories that have transactions (from initialData to show all possible categories)
   const categoriesWithTransactions = categories.filter((cat) =>
     initialData.data.some((tx) => tx.category === cat.name)
   )
+
+  const isAllSelected = transactions.length > 0 && selectedIds.size === transactions.length
+  const isSomeSelected = selectedIds.size > 0
 
   return (
     <Card className="col-span-7">
@@ -137,6 +193,43 @@ export default function RecentTransactions({
         </div>
       </CardHeader>
       <CardContent>
+        {/* Bulk Action Bar */}
+        {isSomeSelected && (
+          <div className="flex items-center gap-3 mb-4 p-3 bg-muted rounded-lg">
+            <span className="text-sm font-medium">
+              เลือก {selectedIds.size} รายการ
+            </span>
+            <Select value={bulkCategory} onValueChange={setBulkCategory}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="เลือกหมวดหมู่" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="none">ไม่มีหมวดหมู่</SelectItem>
+                {categories.map((cat) => (
+                  <SelectItem key={cat.id} value={cat.id}>
+                    {cat.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <Button
+              size="sm"
+              onClick={handleBulkUpdate}
+              disabled={!bulkCategory || isPending}
+            >
+              {isPending ? 'กำลังอัพเดท...' : 'อัพเดท'}
+            </Button>
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={clearSelection}
+            >
+              <X className="h-4 w-4 mr-1" />
+              ยกเลิก
+            </Button>
+          </div>
+        )}
+
         <div className="relative overflow-x-auto">
           {isLoading && (
             <div className="absolute inset-0 bg-background/50 flex items-center justify-center z-10">
@@ -146,6 +239,13 @@ export default function RecentTransactions({
           <Table>
             <TableHeader>
               <TableRow>
+                <TableHead className="w-[40px]">
+                  <Checkbox
+                    checked={isAllSelected}
+                    onCheckedChange={toggleSelectAll}
+                    aria-label="เลือกทั้งหมด"
+                  />
+                </TableHead>
                 <TableHead>วันที่</TableHead>
                 <TableHead>ชื่อบัญชี</TableHead>
                 <TableHead>ประเภท</TableHead>
@@ -155,18 +255,26 @@ export default function RecentTransactions({
                 <TableHead className="text-right">ฝาก</TableHead>
                 <TableHead className="text-right">คงเหลือ</TableHead>
                 <TableHead>หมวดหมู่</TableHead>
+                <TableHead className="w-[50px]"></TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {transactions.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={9} className="text-center text-muted-foreground py-8">
+                  <TableCell colSpan={11} className="text-center text-muted-foreground py-8">
                     ไม่มีข้อมูล
                   </TableCell>
                 </TableRow>
               ) : (
                 transactions.map((tx) => (
-                  <TableRow key={tx.id}>
+                  <TableRow key={tx.id} className={selectedIds.has(tx.id) ? 'bg-muted/50' : ''}>
+                    <TableCell>
+                      <Checkbox
+                        checked={selectedIds.has(tx.id)}
+                        onCheckedChange={() => toggleSelect(tx.id)}
+                        aria-label={`เลือกรายการ ${tx.id}`}
+                      />
+                    </TableCell>
                     <TableCell className="text-sm whitespace-nowrap">
                       {formatDate(tx.date)}
                     </TableCell>
@@ -205,6 +313,17 @@ export default function RecentTransactions({
                       ) : (
                         <span className="text-muted-foreground text-sm">-</span>
                       )}
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8"
+                        onClick={() => setSplitTransactionId(tx.id)}
+                        title="แบ่งรายการ"
+                      >
+                        <Split className="h-4 w-4" />
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))
@@ -288,6 +407,13 @@ export default function RecentTransactions({
             )}
           </div>
         )}
+
+        {/* Split Transaction Dialog */}
+        <SplitTransactionDialog
+          transactionId={splitTransactionId}
+          categories={categories}
+          onClose={() => setSplitTransactionId(null)}
+        />
       </CardContent>
     </Card>
   )

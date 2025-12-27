@@ -21,6 +21,7 @@ import {
   type CategoryData,
   type PaginatedTransactions,
   type AccountInfo,
+  type AccountBalance,
 } from '@/lib/actions/dashboard'
 
 interface DashboardClientProps {
@@ -30,6 +31,7 @@ interface DashboardClientProps {
   initialTransactions: PaginatedTransactions
   categories: { id: string; name: string }[]
   accounts: AccountInfo[]
+  accountBalances: AccountBalance[]
 }
 
 export default function DashboardClient({
@@ -39,6 +41,7 @@ export default function DashboardClient({
   initialTransactions,
   categories,
   accounts,
+  accountBalances,
 }: DashboardClientProps) {
   const [dateRange, setDateRange] = useState<DateRange>({
     from: undefined,
@@ -112,7 +115,10 @@ export default function DashboardClient({
       </div>
 
       {/* Summary Cards */}
-      <SummaryCards data={summary} />
+      <SummaryCards
+        data={summary}
+        accountBalances={selectedAccount === 'all' ? accountBalances : []}
+      />
 
       {/* Charts Row */}
       <div className="grid gap-4 md:grid-cols-7 mt-6">
