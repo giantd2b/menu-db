@@ -182,3 +182,58 @@ export async function unsplitTransaction(
     return { success: false, error: 'เกิดข้อผิดพลาด' }
   }
 }
+
+/**
+ * Update a single transaction
+ */
+export async function updateTransaction(
+  transactionId: string,
+  data: {
+    categoryId?: string | null
+    note?: string | null
+  }
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    await prisma.transaction.update({
+      where: { id: transactionId },
+      data: {
+        categoryId: data.categoryId,
+        note: data.note,
+      },
+    })
+
+    await invalidateDashboardCache()
+
+    return { success: true }
+  } catch (error) {
+    console.error('Update transaction failed:', error)
+    return { success: false, error: 'เกิดข้อผิดพลาด' }
+  }
+}
+
+/**
+ * Delete a transaction
+ */
+export async function deleteTransaction(
+  transactionId: string
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    await prisma.$transaction([
+      // Delete splits first
+      prisma.transactionSplit.deleteMany({
+        where: { transactionId },
+      }),
+      // Delete transaction
+      prisma.transaction.delete({
+        where: { id: transactionId },
+      }),
+    ])
+
+    await invalidateDashboardCache()
+
+    return { success: true }
+  } catch (error) {
+    console.error('Delete transaction failed:', error)
+    return { success: false, error: 'เกิดข้อผิดพลาด' }
+  }
+}

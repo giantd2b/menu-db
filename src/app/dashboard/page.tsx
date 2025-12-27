@@ -41,6 +41,12 @@ export default async function DashboardPage() {
             <AICategorizeButton />
             <ClearDataButton />
             <Link
+              href="/dashboard/transactions"
+              className="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors"
+            >
+              จัดการ Transactions
+            </Link>
+            <Link
               href="/dashboard/rules"
               className="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg hover:bg-secondary/80 transition-colors"
             >

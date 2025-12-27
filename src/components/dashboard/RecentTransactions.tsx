@@ -255,7 +255,7 @@ export default function RecentTransactions({
                 <TableHead className="text-right">ฝาก</TableHead>
                 <TableHead className="text-right">คงเหลือ</TableHead>
                 <TableHead>หมวดหมู่</TableHead>
-                <TableHead className="w-[50px]"></TableHead>
+                <TableHead className="w-[80px]"></TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
